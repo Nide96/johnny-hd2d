@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#a0bbdc"/><rect y="240" width="1280" height="480" fill="#165a78"/>
+<path d="M298 500 Q320 462 368 458 Q410 428 490 425 Q610 405 700 426 Q780 418 845 442 Q900 451 930 487 L989 532 Q984 571 866 583 Q710 605 520 583 Q366 569 298 544Z" fill="#d8b681"/>
+<ellipse cx="180" cy="540" rx="58" ry="26" fill="#6e6961"/>
+<rect x="645.4" y="189" width="43.2" height="261" fill="none" stroke="#ff66ee" stroke-width="3" stroke-dasharray="6 6"/>
+<rect x="506.8" y="142.2" width="273.6" height="124.2" fill="none" stroke="#ff66ee" stroke-width="3" stroke-dasharray="6 6"/>
+<circle cx="667" cy="450" r="7" fill="#ff66ee"/>
+<text x="815" y="180" fill="white" font-family="sans-serif" font-size="18">PALM IS A SEPARATE LAYER - OMIT IT</text>
+<text x="310" y="650" fill="white" font-family="sans-serif" font-size="18">Open flat sand: preserve the shoreline layout. No fire, no palm, no props.</text>
+</svg>

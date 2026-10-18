@@ -1,0 +1,46 @@
+[
+  {
+    "case": "modern",
+    "exit_code": 0,
+    "frames": 240,
+    "validation_errors": 0,
+    "own_stream": 337,
+    "sample_specification": "float32le 2ch 48000Hz",
+    "captured_samples": 196608,
+    "peak": 0.2287304699420929,
+    "rms": 0.031800427559764956
+  },
+  {
+    "case": "classic",
+    "exit_code": 0,
+    "frames": 240,
+    "validation_errors": 0,
+    "own_stream": 358,
+    "sample_specification": "float32le 2ch 48000Hz",
+    "captured_samples": 196608,
+    "peak": 0.2287304699420929,
+    "rms": 0.02837091662987867
+  },
+  {
+    "case": "muted",
+    "exit_code": 0,
+    "frames": 240,
+    "validation_errors": 0,
+    "own_stream": 379,
+    "sample_specification": "float32le 2ch 48000Hz",
+    "captured_samples": 196608,
+    "peak": 0.0,
+    "rms": 0.0
+  },
+  {
+    "case": "zero-volume",
+    "exit_code": 0,
+    "frames": 240,
+    "validation_errors": 0,
+    "own_stream": 400,
+    "sample_specification": "float32le 2ch 48000Hz",
+    "captured_samples": 196608,
+    "peak": 0.0,
+    "rms": 0.0
+  }
+]

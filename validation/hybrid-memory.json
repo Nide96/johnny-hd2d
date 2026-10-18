@@ -1,0 +1,116 @@
+[
+  {
+    "name": "before",
+    "trial": 0,
+    "max_rss_kib": 63916,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 149643264,
+      "drm-resident-vram": 142204928,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 142204928,
+      "drm-memory-gtt": 149643264,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 3.991
+  },
+  {
+    "name": "hybrid",
+    "trial": 0,
+    "max_rss_kib": 64060,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 16474112,
+      "drm-resident-vram": 79290368,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 79290368,
+      "drm-memory-gtt": 16474112,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 3.978
+  },
+  {
+    "name": "before",
+    "trial": 1,
+    "max_rss_kib": 63900,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 149643264,
+      "drm-resident-vram": 142204928,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 142204928,
+      "drm-memory-gtt": 149643264,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 3.995
+  },
+  {
+    "name": "hybrid",
+    "trial": 1,
+    "max_rss_kib": 64116,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 16474112,
+      "drm-resident-vram": 79290368,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 79290368,
+      "drm-memory-gtt": 16474112,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 3.978
+  },
+  {
+    "name": "before",
+    "trial": 2,
+    "max_rss_kib": 63848,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 149643264,
+      "drm-resident-vram": 154075136,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 154075136,
+      "drm-memory-gtt": 149643264,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 4.006
+  },
+  {
+    "name": "hybrid",
+    "trial": 2,
+    "max_rss_kib": 64016,
+    "drm_peak_bytes": {
+      "drm-resident-cpu": 0,
+      "drm-resident-gtt": 16474112,
+      "drm-resident-vram": 79290368,
+      "drm-resident-gds": 0,
+      "drm-resident-gws": 0,
+      "drm-resident-oa": 0,
+      "drm-resident-doorbell": 0,
+      "drm-resident-mmioremap": 0,
+      "drm-memory-vram": 79290368,
+      "drm-memory-gtt": 16474112,
+      "drm-memory-cpu": 0
+    },
+    "seconds": 3.975
+  }
+]

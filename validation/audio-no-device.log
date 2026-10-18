@@ -1,0 +1,16 @@
+[sapp][warning][id:53] outputs/johnny-hd2d/vendor/sokol_app.h:12687:0: 
+	LINUX_X11_QUERY_SYSTEM_DPI_FAILED: failed to query system dpi value, assuming default 96.0
+
+GPU: AMD Radeon 780M Graphics (RADV PHOENIX); staging accepted: 1048576 copy bytes + 2097152 stream bytes x 2 frames
+Atlas relay accepted: 2097152 bytes
+ALSA lib dlmisc.c:339:(snd_dlobj_cache_get0) [error.core] Cannot open shared library libasound_module_pcm_johnny_missing_backend_for_test.so (/usr/lib/alsa-lib/libasound_module_pcm_johnny_missing_backend_for_test.so: cannot open shared object file: No such file or directory)
+[saudio][error][id:2] outputs/johnny-hd2d/vendor/sokol_audio.h:1478:0: 
+	ALSA_SND_PCM_OPEN_FAILED: snd_pcm_open() failed
+
+Audio unavailable: continuing without sound
+Audio: 0 requests, 0 recognized, 0 callbacks, 0 nonzero output samples
+Presentation: hybrid layered HD-2D
+Vulkan: 240 submitted frames, 171 VM steps, 5 final draw commands
+Hybrid stats: 0 Johnny RGBA sheets, 1282048 max R8 upload bytes, 1256 R8 draws, 480 silhouette shadows, 0 faithful composite frames
+Uniform R8: 240 native-resolution line draws, 8934 baked-shadow pixels removed; Johnny original only
+Johnny: 536 warm R8 draws; RGBA replacements disabled

@@ -1,0 +1,99 @@
+{
+  "style": "retro-white-shorts-v1",
+  "architecture": "original-johnny-hd2d",
+  "sheets": [
+    {
+      "name": "walk",
+      "source": "johnny-retro-walk-v1.png",
+      "metadata": "johnny-retro-walk-v1.json",
+      "resource": "JOHNWALK.BMP",
+      "cells": 8,
+      "runtime_sequences": []
+    },
+    {
+      "name": "poses",
+      "source": "johnny-retro-poses-v1.png",
+      "metadata": "johnny-retro-poses-v1.json",
+      "resource": "JOHNWALK.BMP",
+      "cells": 10,
+      "runtime_sequences": []
+    },
+    {
+      "name": "rest",
+      "source": "johnny-retro-rest-v1.png",
+      "metadata": "johnny-retro-rest-v1.json",
+      "resource": "STNDLAY.BMP",
+      "cells": 8,
+      "runtime_sequences": []
+    },
+    {
+      "name": "sleep",
+      "source": "johnny-retro-sleep-v1.png",
+      "metadata": "johnny-retro-sleep-v1.json",
+      "resource": "SLEEP.BMP",
+      "cells": 16,
+      "runtime_sequences": []
+    },
+    {
+      "name": "reading",
+      "source": "johnny-retro-reading-v1.png",
+      "metadata": "johnny-retro-reading-v1.json",
+      "resource": "MJREAD.BMP",
+      "cells": 24,
+      "runtime_sequences": []
+    },
+    {
+      "name": "reading-props",
+      "source": "johnny-retro-reading-props-v1.png",
+      "metadata": "johnny-retro-reading-props-v1.json",
+      "resource": "MJREAD.BMP",
+      "cells": 12,
+      "runtime_sequences": []
+    },
+    {
+      "name": "reading-walk",
+      "source": "johnny-retro-reading-walk-v1.png",
+      "metadata": "johnny-retro-reading-walk-v1.json",
+      "resource": "JOHNWALK.BMP",
+      "cells": 6,
+      "runtime_sequences": []
+    }
+  ],
+  "archived_sheets": [
+    {
+      "name": "fishing",
+      "source": "johnny-retro-fishing-v1.png",
+      "metadata": "johnny-retro-fishing-v1.json",
+      "resource": "MJFISH1.BMP",
+      "cells": 16
+    },
+    {
+      "name": "fishing-parts",
+      "source": "johnny-retro-fishing-parts-v2.png",
+      "metadata": "johnny-retro-fishing-parts-v2.json",
+      "resource": "MJFISH1.BMP",
+      "cells": 14
+    },
+    {
+      "name": "fishing-reactions",
+      "source": "johnny-retro-fishing-reactions-v1.png",
+      "metadata": "johnny-retro-fishing-reactions-v1.json",
+      "resource": "MJFISH2.BMP",
+      "cells": 12
+    },
+    {
+      "name": "fishing-reaction-parts",
+      "source": "johnny-retro-fishing-reaction-parts-v1.png",
+      "metadata": "johnny-retro-fishing-reaction-parts-v1.json",
+      "resource": "MJFISH2.BMP",
+      "cells": 15
+    }
+  ],
+  "fallback": "original R8 atlas with runtime harmonization",
+  "runtime_policy": {
+    "default": "Johnny original R8 only in every scene and preview",
+    "hd_whitelist": [],
+    "character_rgba_disabled": true,
+    "legacy_johnny_hd_flag": "accepted with --modern, no RGBA character substitution"
+  }
+}

@@ -1,0 +1,5 @@
+Upstream: https://github.com/floooh/sokol
+Commit: efeb77603e24daea7d1dd6445b9358bb5d82533b
+Retrieved: 2026-10-18
+Files: sokol_app.h sokol_gfx.h sokol_glue.h sokol_log.h sokol_time.h sokol_audio.h LICENSE
+Unmodified upstream headers. See LICENSE and embedded notices.

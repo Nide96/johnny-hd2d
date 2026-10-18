@@ -1,0 +1,11 @@
+[sapp][warning][id:53] vendor/sokol_app.h:12687:0: 
+	LINUX_X11_QUERY_SYSTEM_DPI_FAILED: failed to query system dpi value, assuming default 96.0
+
+GPU: AMD Radeon 780M Graphics (RADV PHOENIX); staging accepted: 1048576 copy bytes + 2097152 stream bytes x 2 frames
+--johnny-hd: legacy option; Johnny now always uses original R8 sprites
+Atlas relay accepted: 2097152 bytes
+Presentation: hybrid layered HD-2D
+Vulkan: 240 submitted frames, 171 VM steps, 5 final draw commands
+Hybrid stats: 0 Johnny RGBA sheets, 1282048 max R8 upload bytes, 1258 R8 draws, 480 silhouette shadows, 0 faithful composite frames
+Uniform R8: 240 native-resolution line draws, 8934 baked-shadow pixels removed; Johnny original only
+Johnny: 538 warm R8 draws; RGBA replacements disabled

@@ -1,0 +1,75 @@
+{
+  "original_effects": 23,
+  "original_format": {
+    "pcm": 1,
+    "channels": 1,
+    "sample_rate": 11025,
+    "bits": 8
+  },
+  "observed_events": 734,
+  "tested_scenes": 79,
+  "normal_binary_bytes": 239384,
+  "compact_binary_bytes": 88888,
+  "deterministic_fnv64": "de8bfcfeb48c1c6b",
+  "source_core": "engine.c, gfx.c, island.c, ttm.c, resource.c byte-identical to prior validation",
+  "vm_change": "post-step presentation observer only",
+  "device_results": [
+    {
+      "case": "modern",
+      "exit_code": 0,
+      "frames": 240,
+      "validation_errors": 0,
+      "own_stream": 337,
+      "sample_specification": "float32le 2ch 48000Hz",
+      "captured_samples": 196608,
+      "peak": 0.2287304699420929,
+      "rms": 0.031800427559764956
+    },
+    {
+      "case": "classic",
+      "exit_code": 0,
+      "frames": 240,
+      "validation_errors": 0,
+      "own_stream": 358,
+      "sample_specification": "float32le 2ch 48000Hz",
+      "captured_samples": 196608,
+      "peak": 0.2287304699420929,
+      "rms": 0.02837091662987867
+    },
+    {
+      "case": "muted",
+      "exit_code": 0,
+      "frames": 240,
+      "validation_errors": 0,
+      "own_stream": 379,
+      "sample_specification": "float32le 2ch 48000Hz",
+      "captured_samples": 196608,
+      "peak": 0.0,
+      "rms": 0.0
+    },
+    {
+      "case": "zero-volume",
+      "exit_code": 0,
+      "frames": 240,
+      "validation_errors": 0,
+      "own_stream": 400,
+      "sample_specification": "float32le 2ch 48000Hz",
+      "captured_samples": 196608,
+      "peak": 0.0,
+      "rms": 0.0
+    }
+  ],
+  "asan_ubsan": "passed; leak detection disabled for environment",
+  "gpu_material": "passed unchanged",
+  "followup": {
+    "cause": "preview skipped audible early events; remaining bass effects hard to hear on laptop speakers",
+    "preview_skip_steps": 65,
+    "heard_by_user": [
+      "three diagnostic tones",
+      "original fishing effect with skip 65"
+    ],
+    "audio_test_flag": "--audio-test",
+    "normal_binary_bytes": 239416,
+    "compact_binary_bytes": 89356
+  }
+}

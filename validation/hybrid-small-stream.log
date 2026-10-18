@@ -1,0 +1,16 @@
+[sapp][warning][id:53] outputs/johnny-hd2d/vendor/sokol_app.h:12687:0: 
+	LINUX_X11_QUERY_SYSTEM_DPI_FAILED: failed to query system dpi value, assuming default 96.0
+
+GPU: AMD Radeon 780M Graphics (RADV PHOENIX); staging accepted: 1048576 copy bytes + 1048576 stream bytes x 2 frames
+Atlas relay accepted: 2097152 bytes
+Presentation: hybrid layered HD-2D
+Vulkan: 240 submitted frames, 172 VM steps, 7 final draw commands
+Johnny HD: 0 walk sprites submitted
+HD punctuation: 0 vector symbols submitted
+Johnny HD action sheet 0: 0 sprites submitted
+Johnny HD action sheet 1: 0 sprites submitted
+Johnny HD action sheet 2: 0 sprites submitted
+Johnny HD action sheet 3: 0 sprites submitted
+Johnny HD action sheet 4: 0 sprites submitted
+Johnny HD action sheet 5: 0 sprites submitted
+Hybrid stats: 0 lazy HD sheets, 1282048 max R8 upload bytes, 617 R8 draws, 480 silhouette shadows, 0 faithful composite frames

@@ -1,0 +1,190 @@
+{
+  "removed": [
+    {
+      "path": "assets/characters/johnny-poses-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-poses-v1.png",
+      "bytes": 1853172
+    },
+    {
+      "path": "assets/characters/johnny-reading-props-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-reading-props-v1.png",
+      "bytes": 1708675
+    },
+    {
+      "path": "assets/characters/johnny-reading-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-reading-v1.png",
+      "bytes": 2160561
+    },
+    {
+      "path": "assets/characters/johnny-reading-walk-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-reading-walk-v1.png",
+      "bytes": 1694573
+    },
+    {
+      "path": "assets/characters/johnny-reading-walk-v2.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-reading-walk-v2.png",
+      "bytes": 1569655
+    },
+    {
+      "path": "assets/characters/johnny-rest-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-rest-v1.png",
+      "bytes": 1617622
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-parts-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-parts-v1.png",
+      "bytes": 1373609
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-parts-v2.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-parts-v2.png",
+      "bytes": 1396042
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-reaction-parts-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-reaction-parts-v1.png",
+      "bytes": 1540621
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-reactions-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-reactions-v1.png",
+      "bytes": 1820976
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-fishing-v1.png",
+      "bytes": 1804728
+    },
+    {
+      "path": "assets/characters/johnny-retro-poses-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-poses-v1.png",
+      "bytes": 1791996
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-props-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-props-v1.png",
+      "bytes": 1682414
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-v1.png",
+      "bytes": 2141798
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-walk-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-reading-walk-v1.png",
+      "bytes": 1549083
+    },
+    {
+      "path": "assets/characters/johnny-retro-rest-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-rest-v1.png",
+      "bytes": 1588370
+    },
+    {
+      "path": "assets/characters/johnny-retro-sleep-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-sleep-v1.png",
+      "bytes": 1802817
+    },
+    {
+      "path": "assets/characters/johnny-retro-walk-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-retro-walk-v1.png",
+      "bytes": 1748570
+    },
+    {
+      "path": "assets/characters/johnny-sleep-v1.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-sleep-v1.png",
+      "bytes": 1841356
+    },
+    {
+      "path": "assets/characters/johnny-walk-v2.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-walk-v2.png",
+      "bytes": 1728739
+    },
+    {
+      "path": "assets/characters/johnny-walk-v3.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/characters/johnny-walk-v3.png",
+      "bytes": 1757180
+    },
+    {
+      "path": "assets/modern/palm-registered-v2.jcr",
+      "bytes": 6291468
+    },
+    {
+      "path": "assets/modern/palm-registered-v2.png",
+      "bytes": 1837423
+    }
+  ],
+  "bytes_removed": 176422276,
+  "before_project_bytes": 356116165,
+  "binary_bytes": 259896,
+  "compact_binary_bytes": 95952,
+  "strict_build": true,
+  "make_test": true,
+  "vulkan_smoke_frames": 240,
+  "vulkan_validation_errors": 0,
+  "vm_output_identical_to_previous_binary": true,
+  "palm_original_default": true
+}

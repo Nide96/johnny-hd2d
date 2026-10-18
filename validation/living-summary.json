@@ -1,0 +1,178 @@
+{
+  "native_cases": [
+    {
+      "case": "classic",
+      "frames": 240,
+      "live_frames": 0,
+      "wind_frames": 0,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "day",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 240,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "night",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 240,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "hd-palm",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 240,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "coconut-locked",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 0,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "scripted-crown",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 0,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "fire",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 0,
+      "fire_frames": 240,
+      "validation_errors": 0
+    },
+    {
+      "case": "composite",
+      "frames": 240,
+      "live_frames": 0,
+      "wind_frames": 0,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "time-lapse",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 240,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "vm-held",
+      "frames": 240,
+      "live_frames": 240,
+      "wind_frames": 240,
+      "fire_frames": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "reference",
+      "frames": 240,
+      "live_frames": 0,
+      "wind_frames": 0,
+      "fire_frames": 0,
+      "validation_errors": 0
+    }
+  ],
+  "visual_gpu": {
+    "night_star_groups": 67,
+    "stationary_star_matches": 54,
+    "seam_4096_pixel_exact": true,
+    "water_changed_pixels": 96683,
+    "sky_changed_pixels": 176219,
+    "sand_p99_channel_delta": 1.0,
+    "emissive_flame_pixels": 245,
+    "validation_errors": 0
+  },
+  "gpu_pass_timings": [
+    {
+      "case": "day",
+      "render_area": [
+        1920,
+        1080
+      ],
+      "samples": 209,
+      "gpu_mean_ms": 1.6362696937799044,
+      "gpu_p50_ms": 1.658391,
+      "gpu_p95_ms": 1.68428,
+      "gpu_max_ms": 1.706803,
+      "validation_errors": 0
+    },
+    {
+      "case": "night",
+      "render_area": [
+        1920,
+        1080
+      ],
+      "samples": 209,
+      "gpu_mean_ms": 1.5859843301435408,
+      "gpu_p50_ms": 1.594109,
+      "gpu_p95_ms": 1.689851,
+      "gpu_max_ms": 1.734816,
+      "validation_errors": 0
+    },
+    {
+      "case": "reference",
+      "render_area": [
+        1920,
+        1080
+      ],
+      "samples": 209,
+      "gpu_mean_ms": 0.480118,
+      "gpu_p50_ms": 0.486725,
+      "gpu_p95_ms": 0.551368,
+      "gpu_max_ms": 0.608276,
+      "validation_errors": 0
+    },
+    {
+      "case": "fire-hd",
+      "render_area": [
+        1920,
+        1080
+      ],
+      "samples": 209,
+      "gpu_mean_ms": 1.7724712153110047,
+      "gpu_p50_ms": 1.781264,
+      "gpu_p95_ms": 1.867188,
+      "gpu_max_ms": 1.900611,
+      "validation_errors": 0
+    }
+  ],
+  "binary_bytes": 276280,
+  "compact_bytes": 99068,
+  "mask_bytes": 921600,
+  "mask_cpu_temporary_peak_bytes": 3456000,
+  "staging_mib": 7,
+  "vm_hash": "de8bfcfeb48c1c6b",
+  "vm_capture_frames": 30537,
+  "vm_capture_scenes": 79,
+  "original_characters_only": true,
+  "metadata_change": "original scene_id is read-only presentation metadata",
+  "halos": "analytic per-emitter, in the existing passes",
+  "video": {
+    "duration_seconds": 24,
+    "fps": 60,
+    "size": [
+      1280,
+      720
+    ],
+    "audio": false
+  },
+  "launchers_normal_story_verified": true,
+  "compact_fullscreen_verified": true
+}

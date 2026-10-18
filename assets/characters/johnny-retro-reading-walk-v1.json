@@ -1,0 +1,69 @@
+{
+  "source": "johnny-retro-reading-walk-v1.png",
+  "resource": "JOHNWALK.BMP",
+  "alpha_cutoff": 128,
+  "columns": 3,
+  "rows": 2,
+  "cells": [
+    {
+      "sprite": 24,
+      "x": 197,
+      "y": 58,
+      "w": 163,
+      "h": 435,
+      "pivot": 75.5,
+      "plant": 87.5,
+      "span": 51
+    },
+    {
+      "sprite": 25,
+      "x": 643,
+      "y": 60,
+      "w": 253,
+      "h": 422,
+      "pivot": 123.0,
+      "plant": 140.5,
+      "span": 171
+    },
+    {
+      "sprite": 26,
+      "x": 1155,
+      "y": 66,
+      "w": 242,
+      "h": 420,
+      "pivot": 108.5,
+      "plant": 82.0,
+      "span": 44
+    },
+    {
+      "sprite": 27,
+      "x": 175,
+      "y": 545,
+      "w": 205,
+      "h": 421,
+      "pivot": 97.0,
+      "plant": 136.0,
+      "span": 40
+    },
+    {
+      "sprite": 28,
+      "x": 643,
+      "y": 550,
+      "w": 273,
+      "h": 412,
+      "pivot": 134.0,
+      "plant": 144.5,
+      "span": 187
+    },
+    {
+      "sprite": 29,
+      "x": 1183,
+      "y": 546,
+      "w": 215,
+      "h": 420,
+      "pivot": 76.0,
+      "plant": 63.5,
+      "span": 41
+    }
+  ]
+}

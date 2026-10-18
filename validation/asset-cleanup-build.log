@@ -1,0 +1,7 @@
+make: Entering directory '/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/outputs/johnny-hd2d'
+cc -D_POSIX_C_SOURCE=200809L -D_DEFAULT_SOURCE -DSOKOL_VULKAN -isystem vendor -std=c99 -Os -flto -DNDEBUG -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -Wall -Wextra -Wpedantic -Werror -pthread main.c vm_core.c render_frame.c renderer_vulkan.c environment.c audio.c audio_mixer.c resource.c rng.c gfx.c ttm.c ads.c island.c walk.c engine.c config.c -flto -Wl,--gc-sections -Wl,-s -Wl,--build-id=none -lX11 -lXi -lXcursor -lvulkan -lasound -ldl -lm -pthread -o johnny-hd2d
+rm -f johnny-hd2d-compact
+upx --best --lzma -o johnny-hd2d-compact johnny-hd2d
+make: upx: No such file or directory
+make: *** [Makefile:73: johnny-hd2d-compact] Error 127
+make: Leaving directory '/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/outputs/johnny-hd2d'

@@ -1,0 +1,11 @@
+# Données originales et progression locale
+/assets/original/*
+!/assets/original/README.md
+/SCRANTIC.INI
+/SCRANTIC.INI.*
+# Sorties locales
+/work/
+__pycache__/
+*.pyc
+*.o
+*.tmp

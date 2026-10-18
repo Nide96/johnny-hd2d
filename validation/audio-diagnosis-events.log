@@ -1,0 +1,36 @@
+step=82 id=4
+step=88 id=16
+step=134 id=6
+step=161 id=6
+step=281 id=4
+step=294 id=5
+step=305 id=9
+step=354 id=7
+step=372 id=1
+step=376 id=7
+step=395 id=7
+step=416 id=7
+step=434 id=7
+ID=1 seconds=1.004 RMS=0.0694 peak=0.7656 roughness=0.0586
+ID=2 seconds=0.135 RMS=0.1118 peak=0.3359 roughness=0.0345
+ID=3 seconds=0.670 RMS=0.0605 peak=0.5938 roughness=0.0262
+ID=4 seconds=0.453 RMS=0.1227 peak=0.5625 roughness=0.0852
+ID=5 seconds=0.255 RMS=0.1554 peak=0.5391 roughness=0.0156
+ID=6 seconds=1.428 RMS=0.1283 peak=0.4922 roughness=0.0116
+ID=7 seconds=1.358 RMS=0.0883 peak=0.3359 roughness=0.0082
+ID=8 seconds=0.209 RMS=0.1171 peak=0.4531 roughness=0.0653
+ID=9 seconds=0.276 RMS=0.0714 peak=0.3203 roughness=0.0224
+ID=10 seconds=1.834 RMS=0.0925 peak=0.5312 roughness=0.0223
+ID=12 seconds=0.493 RMS=0.0541 peak=0.4766 roughness=0.0315
+ID=14 seconds=1.027 RMS=0.0508 peak=0.3984 roughness=0.0324
+ID=15 seconds=0.257 RMS=0.1127 peak=0.5547 roughness=0.0968
+ID=16 seconds=0.690 RMS=0.0185 peak=0.1719 roughness=0.0134
+ID=17 seconds=0.386 RMS=0.1211 peak=0.3281 roughness=0.0088
+ID=18 seconds=1.265 RMS=0.0535 peak=0.3672 roughness=0.0383
+ID=19 seconds=0.298 RMS=0.0757 peak=0.5000 roughness=0.0304
+ID=20 seconds=0.654 RMS=0.0860 peak=0.2734 roughness=0.0416
+ID=21 seconds=0.439 RMS=0.0711 peak=0.3672 roughness=0.0684
+ID=22 seconds=0.117 RMS=0.2208 peak=0.5234 roughness=0.0562
+ID=23 seconds=0.137 RMS=0.1848 peak=0.4609 roughness=0.0095
+ID=24 seconds=0.877 RMS=0.0665 peak=0.4062 roughness=0.0108
+ID=25 seconds=0.931 RMS=0.0516 peak=0.3438 roughness=0.0419

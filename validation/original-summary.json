@@ -1,0 +1,113 @@
+{
+  "character_source": "original indexed R8 in every mode, including --walk-demo and --johnny-hd",
+  "rgba_character_loader": "removed from renderer API and implementation",
+  "gpu": "AMD Radeon 780M Graphics (RADV PHOENIX)",
+  "fullscreen_capture_pixels": [
+    1920,
+    1080
+  ],
+  "comparison_scene": 20,
+  "vm_steps": 101,
+  "seed": 4242,
+  "clock": "1993-06-01T17:00",
+  "gpu_cases": [
+    {
+      "case": "classic",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "fishing-r8",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "fishing-hd-option",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "raft-build",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "reading",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "sleep",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "night-sleep",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "walk-original",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "special-composite",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    },
+    {
+      "case": "compact-fullscreen",
+      "submitted_frames": 240,
+      "exit_code": 0,
+      "validation_errors": 0
+    }
+  ],
+  "gpu_material": {
+    "johnny_skin_rgb": [
+      245,
+      166,
+      124
+    ],
+    "johnny_white_rgb": [
+      255,
+      245,
+      235
+    ],
+    "johnny_ink_rgb": [
+      28,
+      17,
+      11
+    ],
+    "gpu": "AMD Radeon 780M Graphics (RADV PHOENIX)",
+    "opaque_checker_unique_colors": 1,
+    "linear_mix_expected_rgb": [
+      224,
+      188,
+      185
+    ],
+    "observed_rgb": [
+      224,
+      188,
+      185
+    ],
+    "transparent_checker_preserved": true,
+    "validation_errors": 0
+  },
+  "classic_capture_scenes": 79,
+  "classic_capture_frames": 30537,
+  "staging_capacity_mib": 7,
+  "binary_bytes": 226936,
+  "compact_binary_bytes": 85288,
+  "visual_coverage": "sampled, not exhaustive across all original poses",
+  "sustained_fps_measured": false
+}
