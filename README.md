@@ -13,8 +13,18 @@ shaders ; il ne s’agit pas d’une scène entièrement modélisée en 3D.
 
 ![Décor vivant de nuit](preview-living-night.png)
 
+## Vidéo de présentation
+
+[Regarder ou télécharger la vidéo de présentation](johnny-castaway-linkedin.mp4)
+
+Montage de captures réelles : rendu classique, décor moderne, coucher de soleil,
+puis nuit et feu de camp. **24 secondes · MP4 H.264 · 1280 × 720 · 60 images/s ·
+sans son**, environ 3 Mo. L’adresse du dépôt apparaît à la fin. La vidéo peut
+accompagner un post LinkedIn ; sa cadence ne constitue pas un benchmark du moteur.
+
 ## Sommaire
 
+- [Vidéo de présentation](#vidéo-de-présentation)
 - [Démarrage rapide](#démarrage-rapide)
 - [Installation et données originales](#installation-et-données-originales)
 - [Fonctionnalités](#fonctionnalités)
