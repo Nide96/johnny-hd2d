@@ -80,6 +80,22 @@ vec3 sky(vec2 p,float t) {
     c=mix(c,cloud_color,coverage*.90);
     return c;
 }
+// Three crossing wave trains. Logarithmic depth compresses the ripples toward
+// the horizon; integer temporal harmonics preserve the 4096-second clock seam.
+// Return height and analytic slopes: no neighbour texture reads are needed.
+vec3 sea_surface(vec2 p,float phase) {
+    float depth=max(p.y-.325,.008);
+    vec2 sea=vec2(p.x*110.0,log(depth)*48.0);
+    float a=dot(sea,vec2(.23,1.0))-phase*431.0;
+    float b=dot(sea,vec2(-.57,.83))+phase*283.0;
+    float c=dot(sea,vec2(.91,.38))-phase*719.0;
+    // Fade frequencies smaller than an output pixel, including at the horizon.
+    vec3 aa=1.0-smoothstep(vec3(.65),vec3(2.6),vec3(fwidth(a),fwidth(b),fwidth(c)));
+    vec3 weights=vec3(.56,.29,.15)*aa;
+    float height=dot(sin(vec3(a,b,c)),weights);
+    vec3 slope=cos(vec3(a,b,c))*weights;
+    return vec3(height,dot(slope,vec3(.23,-.57,.91)),dot(slope,vec3(1,.83,.38)));
+}
 void main() {
     vec2 p=screen_uv,sp=source_uv(p);
     vec3 base=texture(sampler2D(background_plate,linear_sampler),sp).rgb;
@@ -92,23 +108,35 @@ void main() {
     float near_water=smoothstep(.33333,1.0,p.y);
     vec2 swell=vec2(sin(p.y*145.0-phase*173.0)+.36*sin(p.x*80.0+p.y*180.0-phase*311.0),
                       .36*sin(p.y*230.0-p.x*40.0+phase*227.0));
-    vec2 q=clamp(sp+swell*vec2(.0020,.0009)*near_water*water,vec2(.001),vec2(.999));
+    vec3 ripple=sea_surface(p,phase);
+    // Keep the painted sea stable: relief is conveyed mainly by moving light.
+    vec2 displacement=swell*vec2(.00065,.00030)+ripple.yz*vec2(.00030,.00016);
+    vec2 q=clamp(sp+displacement*near_water*water,vec2(.001),vec2(.999));
     vec3 color=texture(sampler2D(background_plate,linear_sampler),q).rgb;
         // Remove the sunset photograph's fixed golden sea reflection before the
     // procedural sun/moon reflection is added in its actual celestial column.
     float old_column=.81-.24*near_water;
     float painted_area=exp(-pow(abs(p.x-old_column)/(.09+.04*near_water),4.0));
     float painted_gold=max(painted_area,smoothstep(.015,.17,color.r-color.b))*(1.0-land)*(1.0-mask.b);
-    float clean_x=p.y<.57?q.x-.23:(p.y>.87?q.x-.27:.96);
+    // Reflect a sea-only patch at its native horizontal scale. A fixed x or
+    // compressed patch would stretch the photograph into horizontal ribbons.
+    float clean_x=.865+abs(mod(q.x+.12,.24)-.12);
     vec3 clean_sea=texture(sampler2D(background_plate,linear_sampler),vec2(clamp(clean_x,.01,.99),q.y)).rgb;
     float clean_luma=dot(clean_sea,vec3(.299,.587,.114));
     vec3 water_neutral=clean_luma*vec3(.51,.79,1.10);
     color=mix(color,mix(clean_sea,water_neutral,.55),painted_gold*.96);
-    float crest=pow(max(0.0,sin(p.y*325.0+p.x*46.0-phase*613.0)),12.0);
     float light_x=mix(moon.x,sun.x,environment.x);
+    vec3 normal=normalize(vec3(-ripple.y*.32,-ripple.z*.32,1.0));
+    vec3 light_dir=normalize(vec3((light_x-p.x)*.8,-.65,.75));
+    float relief=dot(normal,light_dir)-light_dir.z;
+    float sea_strength=water*smoothstep(.345,.41,p.y);
+    color*=1.0+relief*sea_strength*.32;
+    // Broken, gently varying glints rather than continuous white stripe bands.
+    float broken=.35+.65*pow(.5+.5*sin(p.x*91.0+p.y*37.0+phase*137.0),2.0);
+    float crest=smoothstep(.42,.82,ripple.x)*broken;
     float column=exp(-pow((p.x-light_x)/(.016+.07*near_water),2.0));
     vec3 reflection=mix(vec3(.20,.33,.58),mix(vec3(.65,.73,.70),vec3(1,.57,.21),environment.z),environment.x);
-    color+=reflection*column*crest*water*(.04+.20*environment.z);
+    color+=reflection*crest*sea_strength*(.035+column*(.05+.20*environment.z));
     float swash=-2.0+4.0*sin(TAU*t/8.0+.35*sin(p.x*24.0));
     float lace=.35+.65*noise16(vec2(p.x*110.0,p.y*70.0)+vec2(t/256.0,0));
     float foam=(1.0-smoothstep(.5,2.0,abs(shore-swash)))*lace;

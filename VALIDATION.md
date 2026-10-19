@@ -1,5 +1,27 @@
 # Validation du paquet allégé — 19 octobre 2026
 
+## Vaguelettes et reflets de la mer
+
+Trois trains de vagues croisés produisent des pentes analytiques pour éclairer
+l’eau. La perspective resserre les rides vers l’horizon ; un filtre par dérivées
+atténue les fréquences sous le pixel. Les reflets sont fragmentés et la
+déformation de l’illustration est réduite. La zone de remplacement du reflet
+photographique utilise une portion de mer réfléchie à son échelle horizontale,
+au lieu d’étirer une colonne de pixels en rubans. Aucun asset n’est ajouté.
+
+- Compilation C99 stricte et génération SPIR-V réussies.
+- make test : 79 scènes, 30 537 images logiques exactement identiques.
+- Huit captures Vulkan : jour, coucher du soleil, nuit, animation à deux
+  secondes, scintillement nocturne, ancien décor, bouclage à 4096 s et feu.
+  Zéro erreur de validation ; bouclage identique pixel par pixel.
+- Sable intérieur : variation temporelle au percentile 99 de 1 niveau sur 255
+  (éclairage existant des nuages), sans déplacement du sol.
+- Radeon 780M, rendu 1920 × 1080 : passe graphique moyenne 1,70 ms le jour,
+  1,72 ms la nuit et 1,76 ms avec feu, sur 209 mesures après préchauffage.
+  Ces temps excluent le travail CPU, l’upload et la présentation/vsync.
+- Aucun code C, script VM, sprite ou traitement audio modifié. ASan/UBSan
+  non réexécutés pour cette modification limitée au shader et à sa compilation.
+
 ## Correction des ombres de noix de coco
 
 Les composantes d’ombre grises de 21 poses MJCOCO.BMP sont désormais masquées

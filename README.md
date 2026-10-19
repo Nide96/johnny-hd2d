@@ -170,7 +170,10 @@ retirés. Les options anciennes
 
 ### Mer, rivage et sable
 
-- Houle et rides à plusieurs fréquences, avec déformation UV réservée à l’eau.
+- Houle et vaguelettes croisées, plus serrées vers l’horizon et filtrées selon
+  la résolution de sortie. Déformation UV discrète réservée à l’eau.
+- Relief apparent éclairé et petits reflets fragmentés : la mer s’anime surtout
+  par sa lumière, sans nouvelles textures ni simulation géométrique.
 - Reflets du soleil et de la lune suivant leur position visuelle.
 - Écume qui avance et reflue sur la plage ; bordure de sable humide.
 - Masque du rivage calculé au démarrage à partir du décor fourni, avec une
