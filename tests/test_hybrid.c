@@ -82,9 +82,9 @@ int main(int argc, char **argv) {
   assert(jc_render_frame_init(&frame));
   uint8_t *copy = malloc((size_t)JC_ATLAS_W * JC_ATLAS_H);
   assert(copy);
-  unsigned masks = 0, removed = 0;
+  unsigned masks = 0, removed = 0, coconut_masks = 0;
   const char *families[] = {"JOHNWALK.BMP", "MJ_AMB.BMP",  "SLEEP.BMP",
-                            "MJREAD.BMP",   "MJFISH1.BMP", "MJFISH2.BMP"};
+                            "MJREAD.BMP",   "MJFISH1.BMP", "MJFISH2.BMP", "MJCOCO.BMP"};
   for (size_t n = 0; n < sizeof families / sizeof *families; ++n) {
     JCBmp bmp = {0};
     assert(jc_archive_bmp(&assets.archive, families[n], &bmp, &error));
@@ -99,8 +99,10 @@ int main(int argc, char **argv) {
       memcpy(copy, frame.atlas, (size_t)JC_ATLAS_W * JC_ATLAS_H);
       jc_sprite_strip_shadow(copy, &d);
       const JCShadowMask *m = jc_sprite_shadow_mask(&d);
-      if (m)
+      if (m) {
         ++masks;
+        if (n == 6) ++coconut_masks;
+      }
       for (int y = 0; y < d.h; ++y)
         for (int x = 0; x < d.w; ++x) {
           size_t at = (size_t)y * JC_ATLAS_W + x;
@@ -119,6 +121,17 @@ int main(int argc, char **argv) {
                copy[4u * JC_ATLAS_W + 11] == 8);
       if (n == 2 && id != 12)
         assert(m);
+      if (n == 6) {
+        bool body = id <= 6 || (id >= 8 && id <= 15) ||
+                    (id >= 20 && id <= 23) || id == 31 || id == 32;
+        assert((m != NULL) == body);
+        if (id == 1) {
+          /* Grey cap shading is not the ground shadow (reported pose). */
+          assert(frame.atlas[4u * JC_ATLAS_W + 70] == 8);
+          assert(copy[4u * JC_ATLAS_W + 70] == 8);
+          assert(!jc_sprite_unhandled_shadow(&frame, &d));
+        }
+      }
       JCVisibleBounds b = jc_sprite_body_bounds(&frame, &d);
       assert(b.bottom > 0 && b.bottom <= d.h && b.right <= d.w);
       if (n == 2)
@@ -128,7 +141,7 @@ int main(int argc, char **argv) {
     }
     jc_bmp_free(&bmp);
   }
-  assert(masks > 100 && removed > 10000);
+  assert(masks > 100 && removed > 10000 && coconut_masks == 21);
   free(copy);
   JCDraw unknown = {.w = 16, .h = 16};
   strcpy(unknown.resource, "UNREVIEWED.BMP");

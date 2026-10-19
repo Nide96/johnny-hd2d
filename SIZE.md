@@ -6,11 +6,11 @@ les objets Git ni les bibliothèques système. 1 Mio = 1 048 576 octets.
 | Périmètre | Octets | Mio |
 | --- | ---: | ---: |
 | Dépôt courant avant ce nettoyage, sans .git | 105687778 | 100.79 |
-| Dépôt source allégé, vidéo de présentation comprise | 12707848 | 12.12 |
-| Gain sur le dépôt courant | 92979930 | 88.67 |
+| Dépôt source allégé, vidéo de présentation comprise | 12713547 | 12.12 |
+| Gain sur le dépôt courant | 92974231 | 88.67 |
 | Paquet minimal d’exécution, sans données originales | 6559175 | 6.26 |
 
-**Réduction du contenu distribué : 87.98 %.**
+**Réduction du contenu distribué : 87.97 %.**
 Le paquet runtime est un périmètre différent : il ne fournit ni compilation
 ni tests ni vidéo, uniquement l’exécutable standard, le décor actif, les
 notices et les deux lanceurs jour/nuit.

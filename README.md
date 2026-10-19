@@ -203,8 +203,10 @@ Les sprites debout ont une ombre projetée et cisaillée. Les poses couchées,
 assises et le radeau utilisent une ombre de contact proche de leur silhouette.
 Le masque du sable limite les débordements dans l’eau.
 
-Les ombres grises d’origine identifiées dans **121 sprites** sont neutralisées
+Les ombres grises d’origine identifiées dans **142 sprites** sont neutralisées
 uniquement dans les copies GPU, pour éviter le doublon avec les ombres modernes.
+Les poses de noix de coco et de secouement du palmier (`MJCOCO.BMP`) sont
+incluses : leurs anciennes taches grises ne sont plus dessinées sur le sable.
 Les vêtements et éléments gris utiles sont préservés. Les zones non auditées
 restent traitées de manière conservatrice.
 
