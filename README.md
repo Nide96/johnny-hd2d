@@ -15,12 +15,18 @@ It is not a fully modelled 3D scene.
 
 ## Demo video
 
-[Watch or download the demo video](johnny-castaway-linkedin.mp4)
+[Watch or download the demo video](johnny-castaway-demo.mp4)
 
-Recorded from the application: classic rendering, the modern backdrop, sunset,
-then night and a campfire. **24 seconds · H.264 MP4 · 1280 × 720 · 60 fps ·
-no audio**, approximately 3 MB. This earlier recording does not show every
-subsequent visual fix.
+Three minutes of actual captures: the classic presentation, reading, coconuts,
+fishing, raft building, sunset, a campfire and night on the island.
+**3 minutes · H.264 MP4 · 1280 × 720 · 60 fps · original sound effects**,
+approximately 11.8 MB. This is an optimised copy for the repository.
+French on-screen text explains the project, from REA
+and the C99 port to the modern Vulkan effects. The recording includes the latest
+shadow fixes.
+
+The project includes **all 79 complete scenes from the original game**.
+This video shows a selection of eight sequences, rather than the full catalogue.
 
 ## Contents
 
@@ -568,9 +574,9 @@ Git history; use the current branch ZIP or `git clone --depth 1` for a smaller d
 
 [VALIDATION.md](VALIDATION.md) records checks and their limits. Temporary logs
 are written to `work/` and are not part of the distribution.
-The [demo video](johnny-castaway-linkedin.mp4) contains actual captures of the
-classic, modern, sunset and night/campfire presentations. It is silent; test
-the application's sound in the program itself.
+The [demo video](johnny-castaway-demo.mp4) contains actual captures of the
+classic, modern, sunset and night/campfire presentations. It includes original
+sound effects and French on-screen explanations, with no added music.
 
 ## Port origins and licences
 
