@@ -19,8 +19,7 @@ shaders ; il ne s’agit pas d’une scène entièrement modélisée en 3D.
 
 Montage de captures réelles : rendu classique, décor moderne, coucher de soleil,
 puis nuit et feu de camp. **24 secondes · MP4 H.264 · 1280 × 720 · 60 images/s ·
-sans son**, environ 3 Mo. L’adresse du dépôt apparaît à la fin. La vidéo peut
-accompagner un post LinkedIn ; sa cadence ne constitue pas un benchmark du moteur.
+sans son**, environ 3 Mo.
 
 ## Sommaire
 
