@@ -9,3 +9,12 @@ __pycache__/
 *.pyc
 *.o
 *.tmp
+
+# Ressources de présentation remplacées / résultats générés
+/assets/characters/
+/assets/layout/
+/assets/scenes/
+/assets/modern/*.png
+/assets/modern/*.jpg
+/assets/modern/*.jpeg
+/johnny-hd2d-compact

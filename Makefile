@@ -62,7 +62,6 @@ shaders:
 	$(SHDC) --input shaders/palette.glsl --output generated/palette.glsl.h --slang spirv_vk --no-log-cmdline
 
 	$(SHDC) --input shaders/modern.glsl --output generated/modern.glsl.h --slang spirv_vk --no-log-cmdline
-	$(SHDC) --input shaders/character.glsl --output generated/character.glsl.h --slang spirv_vk --no-log-cmdline
 	$(SHDC) --input shaders/foliage.glsl --output generated/foliage.glsl.h --slang spirv_vk --no-log-cmdline
 
 UPX_BIN ?= upx

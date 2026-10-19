@@ -11,8 +11,6 @@ original et lumière du feu. Cible testée : Linux, Radeon 780M, pilote RADV.
 Le rendu est une composition **2D / 2.5D**, avec une illustration de fond et des
 shaders ; il ne s’agit pas d’une scène entièrement modélisée en 3D.
 
-![Décor vivant de nuit](preview-living-night.png)
-
 ## Vidéo de présentation
 
 [Regarder ou télécharger la vidéo de présentation](johnny-castaway-linkedin.mp4)
@@ -166,8 +164,8 @@ dès le début des scènes sensibles au tronc, aux noix de coco ou à la couronn
 pour préserver leurs contacts et leur mouvement comique.
 
 Les anciennes planches PNG/JCR de Johnny et la maquette peinte du palmier ont
-été supprimées : **44 fichiers, 168,25 Mio retirés**. Les métadonnées et rapports
-restants dans `assets/characters/` sont historiques. Les options anciennes
+été supprimées : **44 fichiers, 168,25 Mio retirés**. Les métadonnées obsolètes et leurs outils de traitement sont également
+retirés. Les options anciennes
 `--johnny-hd` et `--palm-original` ne réactivent aucune texture retirée.
 
 ### Mer, rivage et sable
@@ -407,12 +405,9 @@ johnny-hd2d/
 ├── generated/                 Headers SPIR-V générés
 ├── vendor/                    Headers Sokol et licences
 ├── assets/original/           Données du jeu, uniquement dans la copie locale
-├── assets/modern/             Décor JCR actif, sources et anciennes variantes
-├── assets/layout/             Références de calage
-├── assets/scenes/             Inventaire des scènes
-├── assets/characters/         Métadonnées historiques, sans planches PNG/JCR
+├── assets/modern/             Unique décor JCR actif et sa provenance
 ├── tests/ / tools/            Tests C et outils de développement
-├── validation/                Rapports de mesure et journaux conservés
+├── VALIDATION.md              Résumé actuel des vérifications
 └── work/                      Sorties temporaires de test, hors archive
 ```
 
@@ -476,9 +471,9 @@ Le benchmark compile une variante temporaire instrumentée avec timestamps GPU ;
 il ne mesure pas la fréquence de présentation complète de l’application.
 `make inventory` régénère l’inventaire depuis les scènes originales.
 
-Les outils anciens `inspect_*_sheet*.py` nécessitent les planches retirées ;
-ils sont conservés pour documenter les jalons artistiques, sans intervenir dans
-la compilation ni dans le runtime actuel.
+Les anciens outils de traitement de planches RGBA et leur métadonnées ont été
+retirés. `make inventory` produit son inventaire local dans `assets/scenes/`,
+non distribué et ignoré par Git.
 
 ### Dépannage
 
@@ -514,24 +509,23 @@ pas un benchmark du paquet allégé actuel. La VSync est active et le débit dé
 de l’écran, du compositeur et du reste de la boucle. **144 FPS soutenus ne sont
 pas garantis ni démontrés par ces mesures.**
 
-### Empreinte disque après retrait des textures
+### Distribution minimale
 
-Relevé du nettoyage du 18 octobre 2026, avant cette révision documentaire :
+Le dépôt conserve le code, les tests et outils actifs, les shaders, les licences,
+le décor JCR utilisé et une seule vidéo de présentation. Les anciennes captures,
+GIF, vidéos, variantes de décors, PNG redondants, métadonnées de planches
+retirées et journaux historiques ne sont plus distribués. Le binaire compact
+se génère avec `make compact` ; il n’est plus livré en double.
 
-| Périmètre | Taille |
-| --- | ---: |
-| Dossier local complet, captures et fichiers de travail inclus | 171,36 Mio |
-| Dont fichiers de travail et tests dans `work/` | 72,06 Mio |
-| Contenu de la distribution décompressée | 97,87 Mio |
-| Archive gzip | 89,57 Mio |
-| Exécutable standard | 259 896 octets |
-| Exécutable compact UPX | 95 952 octets |
-| Textures retirées | 168,25 Mio |
+Un paquet d’exécution séparé ne contient que l’exécutable standard, le décor
+JCR, les notices, un court guide et les deux lanceurs jour/nuit. Aucun code,
+test, outil de compilation ou média de présentation n’est nécessaire au runtime.
+Les trois données originales restent à fournir séparément.
 
-La documentation, les captures et les médias expliquent une grande partie du
-volume distribué. La taille de l’exécutable lié dynamiquement n’inclut ni les
-ressources ni les bibliothèques système. Les tailles du dossier et de l’archive
-évoluent avec les nouvelles captures et les tests ; 1 Mio = 1 048 576 octets.
+Mesures et périmètres : [SIZE.md](SIZE.md). Le format Mio vaut 1 048 576 octets.
+La taille des bibliothèques système n’est pas incluse. Les anciens gros assets
+restent dans l’historique Git ; pour un téléchargement allégé, choisir le ZIP de
+la branche courante ou `git clone --depth 1`.
 
 ## Limites connues
 
@@ -556,26 +550,13 @@ ressources ni les bibliothèques système. Les tailles du dossier et de l’arch
 - Les captures de validation attestent des cas testés, pas d’une validation
   visuelle exhaustive des 79 scènes sur tous les pilotes.
 
-## Rapports et historique
+## Vérifications et vidéo
 
-| Document | Sujet |
-| --- | --- |
-| [ETAT-PROJET.md](ETAT-PROJET.md) | État et décisions successives du projet. |
-| [VALIDATION-UNIFORME.md](VALIDATION-UNIFORME.md) | Johnny R8, couleurs et contrôles de silhouette. |
-| [VALIDATION-DECOR-VIVANT.md](VALIDATION-DECOR-VIVANT.md) | Eau, ciel, étoiles, feu, mémoire et mesures GPU. |
-| [VALIDATION-AUDIO.md](VALIDATION-AUDIO.md) | Bruitages et diagnostic de sortie. |
-| [VALIDATION-PALMIER-RETRO.md](VALIDATION-PALMIER-RETRO.md) | Origine du problème de palme et validation du palmier R8. |
-| [validation/asset-cleanup.json](validation/asset-cleanup.json) | Liste exacte des textures supprimées et vérifications du paquet allégé. |
-
-Les autres rapports HD, lecture, pêche, rétro et recalage documentent des étapes
-antérieures. Leurs captures peuvent montrer des textures qui ne sont plus
-présentes. Ce README décrit l’état courant ; leurs anciens exemples ne réactivent
-pas ces ressources.
-
-L’aperçu [preview-living.mp4](preview-living.mp4) est une vidéo **muette** de
-24 secondes, 1280 × 720 à 60 images/s, avec marche isolée pour montrer le décor.
-Il ne représente ni le comportement des lanceurs d’histoire ni une mesure de
-144 FPS. L’audio du programme se teste directement dans l’application.
+Le document [VALIDATION.md](VALIDATION.md) résume les contrôles et leurs limites.
+Les journaux temporaires sont produits dans `work/` ; ils ne font pas partie
+de la distribution. La [vidéo de présentation](johnny-castaway-linkedin.mp4)
+montre les captures réelles classique/moderne/crépuscule/nuit avec feu.
+Elle est muette ; le son du programme se teste dans l’application.
 
 ## Origine du portage et licences
 

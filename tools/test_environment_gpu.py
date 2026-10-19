@@ -3,7 +3,7 @@
 from pathlib import Path
 import subprocess,time,os,json,signal
 from PIL import Image,ImageDraw,ImageFont
-root=Path(__file__).resolve().parents[1];out=root/'work/gpu-environment';out.mkdir(exist_ok=True)
+root=Path(__file__).resolve().parents[1];out=root/'work/gpu-environment';out.mkdir(parents=True,exist_ok=True)
 cases=[('day','12:00',0,[]),('sunset','17:00',0,[]),('night','00:00',0,[]),('wave','17:00',2,[]),('night-twinkle','00:00',32,[]),('reference','17:00',0,['--no-decor-fx']),('seam','17:00',4096,[]),('fire','00:00',0,[])]
 for name,hour,t,args in cases:
  log=(out/(name+'.log')).open('w')

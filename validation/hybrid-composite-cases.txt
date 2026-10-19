@@ -1,5 +1,0 @@
-scene=10 step=582 scenery=3 compatible=0
-scene=69 step=1 scenery=0 compatible=0
-scene=71 step=1 scenery=0 compatible=0
-scene=72 step=1 scenery=0 compatible=0
-scene=73 step=1 scenery=0 compatible=0

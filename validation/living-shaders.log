@@ -1,6 +1,0 @@
-make: Entering directory '/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/outputs/johnny-hd2d'
-/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/work/sokol-shdc --input shaders/palette.glsl --output generated/palette.glsl.h --slang spirv_vk --no-log-cmdline
-/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/work/sokol-shdc --input shaders/modern.glsl --output generated/modern.glsl.h --slang spirv_vk --no-log-cmdline
-/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/work/sokol-shdc --input shaders/character.glsl --output generated/character.glsl.h --slang spirv_vk --no-log-cmdline
-/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/work/sokol-shdc --input shaders/foliage.glsl --output generated/foliage.glsl.h --slang spirv_vk --no-log-cmdline
-make: Leaving directory '/home/nide/Documents/Codex/2026-10-18/tu-es-un-directeur-artistique-et/outputs/johnny-hd2d'
