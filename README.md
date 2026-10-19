@@ -1,87 +1,96 @@
-# Johnny Castaway HD-2D — Linux, C99 et Vulkan
+# Johnny Castaway HD-2D — Linux, C99 and Vulkan
 
-Remaster expérimental de **Johnny Castaway / Screen Antics (1992)** : les
-scripts, les gags et les sprites originaux évoluent dans un décor moderne animé
-par GPU. Le projet conserve le dessin rétro de Johnny, sa casquette, son short
-et sa barbe, avec une palette plus chaude et un éclairage adapté à l’île.
+An experimental remaster of **Johnny Castaway / Screen Antics (1992)**: the
+original scripts, visual gags and sprites play against a modern, GPU-animated
+backdrop. Johnny keeps his retro design, cap, shorts and beard, with warmer
+colours and lighting that ties him to the island.
 
-**État actuel :** 79 scènes et 2 392 sprites d’origine, rendu classique ou moderne,
-bruitages originaux, mer et rivage animés, ciel jour/nuit avec étoiles, palmier
-original et lumière du feu. Cible testée : Linux, Radeon 780M, pilote RADV.
-Le rendu est une composition **2D / 2.5D**, avec une illustration de fond et des
-shaders ; il ne s’agit pas d’une scène entièrement modélisée en 3D.
+**Current features:** 79 original scenes and 2,392 sprites, classic and modern
+rendering, original sound effects, animated sea and shoreline, a day/night sky
+with stars, the original palm tree and campfire lighting. Tested on Linux with
+a Radeon 780M using RADV.
 
-## Vidéo de présentation
+The presentation is **2D / 2.5D**, combining an illustrated backdrop with shaders.
+It is not a fully modelled 3D scene.
 
-[Regarder ou télécharger la vidéo de présentation](johnny-castaway-linkedin.mp4)
+## Demo video
 
-Montage de captures réelles : rendu classique, décor moderne, coucher de soleil,
-puis nuit et feu de camp. **24 secondes · MP4 H.264 · 1280 × 720 · 60 images/s ·
-sans son**, environ 3 Mo.
+[Watch or download the demo video](johnny-castaway-linkedin.mp4)
 
-## Sommaire
+Recorded from the application: classic rendering, the modern backdrop, sunset,
+then night and a campfire. **24 seconds · H.264 MP4 · 1280 × 720 · 60 fps ·
+no audio**, approximately 3 MB. This earlier recording does not show every
+subsequent visual fix.
 
-- [Vidéo de présentation](#vidéo-de-présentation)
-- [Démarrage rapide](#démarrage-rapide)
-- [Installation et données originales](#installation-et-données-originales)
-- [Fonctionnalités](#fonctionnalités)
-- [Commandes et prévisualisations](#commandes-et-prévisualisations)
-- [Toutes les options](#toutes-les-options)
-- [Progression et configuration](#progression-et-configuration)
-- [Compilation](#compilation)
+## Contents
+
+- [Demo video](#demo-video)
+- [Quick start](#quick-start)
+- [Installation and original game data](#installation-and-original-game-data)
+- [Features](#features)
+- [Commands and previews](#commands-and-previews)
+- [All command-line options](#all-command-line-options)
+- [Progress and configuration](#progress-and-configuration)
+- [Building](#building)
 - [Architecture](#architecture)
-- [Tests et diagnostics](#tests-et-diagnostics)
-- [Performances et taille](#performances-et-taille)
-- [Limites connues](#limites-connues)
-- [Origine du portage et licences](#origine-du-portage-et-licences)
+- [Tests and diagnostics](#tests-and-diagnostics)
+- [Performance and size](#performance-and-size)
+- [Known limitations](#known-limitations)
+- [Validation and video](#validation-and-video)
+- [Port origins and licences](#port-origins-and-licences)
 
-## Démarrage rapide
+## Quick start
 
-Cloner le dépôt, ajouter les trois fichiers originaux décrits ci-dessous, puis
-compiler et lancer la démonstration :
+Clone the repository, add the three original game files described below, then
+build and start the preview:
 
 ```sh
-git clone https://github.com/Nide96/johnny-hd2d.git
+git clone --depth 1 https://github.com/Nide96/johnny-hd2d.git
 cd johnny-hd2d
-# Ajouter RESOURCE.MAP, RESOURCE.001 et SCRANTIC.SCR dans assets/original/
+# Place RESOURCE.MAP, RESOURCE.001 and SCRANTIC.SCR in assets/original/
 make
 ./preview-living.sh --fullscreen
 ```
 
-Cette démonstration joue les scènes normales avec une journée visuelle de deux
-minutes. Pour commencer immédiatement sous les étoiles :
+Alternatively, [download the current source as a ZIP](https://github.com/Nide96/johnny-hd2d/archive/refs/heads/main.zip),
+extract it and open a terminal in the extracted directory before running `make`.
+The ZIP and shallow clone avoid downloading the old, larger assets in Git history.
+
+The living preview runs the normal scenes with a two-minute visual day. To start
+under the stars instead:
 
 ```sh
 ./preview-stars.sh --fullscreen
 ```
 
-Pour une session normale, avec l’heure locale et la progression persistante :
+For a normal session using local time and persistent progress:
 
 ```sh
 ./johnny-hd2d --modern --fullscreen
 ```
 
-**Échap** ferme l’application. **M** active ou désactive le son. La fenêtre
-standard est redimensionnable ; `--fullscreen` choisit le plein écran au démarrage.
-Toutes les commandes relatives ci-dessous supposent que le terminal se trouve
-dans le dossier du projet. Les scripts localisent leur exécutable par leur propre
-chemin et peuvent aussi être lancés depuis un autre dossier.
+**Escape** closes the application. **M** toggles sound. The normal window is
+resizable; `--fullscreen` selects fullscreen at startup.
 
-## Installation et données originales
+All relative commands below assume your terminal is in the project directory.
+The launch scripts locate the executable relative to their own location, so
+they can also be started from another directory.
 
-### Environnement nécessaire
+## Installation and original game data
 
-- Linux avec Vulkan fonctionnel et les bibliothèques correspondant au GPU.
-- X11 ; sous Hyprland/Wayland, une session **XWayland** disponible pour la fenêtre.
-- Bibliothèques d’exécution X11, Xi, Xcursor, Vulkan, ALSA et bibliothèques C usuelles.
-- ALSA pour le son ; PipeWire peut fournir la sortie ALSA, comme sur le poste testé.
+### Runtime requirements
 
-Les en-têtes Sokol sont fournis dans `vendor/`. Rust, SDL et Wine ne sont pas
-nécessaires à l’exécution. Python ne sert qu’aux outils de développement.
+- Linux with working Vulkan support and the appropriate GPU driver.
+- X11; on Hyprland/Wayland, **XWayland** must be available for the window.
+- X11, Xi, Xcursor, Vulkan and ALSA runtime libraries, plus the usual C libraries.
+- ALSA audio output; PipeWire can provide the ALSA route, as on the tested system.
 
-### Fichiers du jeu
+Sokol headers are included in `vendor/`. Rust, SDL and Wine are not required to
+run the program. Python is only used by development tools.
 
-Placer les trois fichiers de sa propre copie du jeu dans :
+### Original game files
+
+Place these three files from your own copy of the game in:
 
 ```text
 assets/original/
@@ -90,382 +99,376 @@ assets/original/
 └── SCRANTIC.SCR
 ```
 
-Respecter les noms et la casse. Ces données originales **ne sont pas incluses
-dans l’archive distribuable**. `SCRANTIC.SCR` est lu comme une source de tables et
-de sons ; le programme Windows n’est pas exécuté.
+File names are case-sensitive. The original game data **is not included in the
+distribution**. `SCRANTIC.SCR` is read as a source of tables and sound data;
+the Windows executable is not run.
 
-Un autre emplacement est accepté :
+You can use another data directory:
 
 ```sh
-./johnny-hd2d --data /chemin/vers/les/originaux --modern --fullscreen
+./johnny-hd2d --data /path/to/original/files --modern --fullscreen
 ```
 
-`--data` change le dossier des données originales, pas celui du décor moderne.
-Le décor par défaut est cherché à côté de l’exécutable dans
-`assets/modern/island-registered-v2.jcr`. Il faut conserver cette arborescence
-quand on déplace le programme. `--modern-plate` permet un chemin explicite.
+`--data` changes the original game data directory, not the modern backdrop path.
+The default backdrop is located relative to the executable at
+`assets/modern/island-registered-v2.jcr`. Keep this directory structure when
+moving the program, or use `--modern-plate` to supply an explicit path.
 
-## Fonctionnalités
+## Features
 
-### Logique et fidélité rétro
+### Original logic and retro fidelity
 
-- Portage C99 du cœur logique : ressources compressées, scripts ADS/TTM,
-  déplacements, sélection des scènes, calendrier et progression sur 11 chapitres.
-- Catalogue de **79 scènes**, **117 feuilles BMP** et **2 392 sprites** originaux.
-- Canvas logique indexé **640 × 480**, clips et assemblages d’origine conservés.
-- Deux horloges héritées : composition à **55 ms**, timer des scripts à **16 ms**.
-- Présentation GPU indépendante de la cadence de composition, avec interpolation
-  sub-pixel des déplacements compatibles entre deux états. Cette interpolation
-  ne fabrique pas de poses intermédiaires ni ne change la chronologie des gags.
-- Graine RNG et calendrier injectables pour rejouer un cas de manière reproductible.
+- C99 port of the logic core: compressed resources, ADS/TTM scripts, movement,
+  scene selection, calendar and progression through 11 story chapters.
+- **79 scenes**, **117 BMP sprite sheets** and **2,392 original sprites**.
+- An indexed **640 × 480** logical canvas, preserving original clipping and
+  multipart sprite assembly.
+- Two inherited timers: **55 ms** composition steps and a **16 ms** script timer.
+- GPU presentation independent of composition timing, with subpixel movement
+  interpolation between compatible states. Interpolation does not invent
+  intermediate animation poses or change the timing of the gags.
+- Injectable RNG seed and calendar for reproducible playback.
 
-### Deux présentations
+### Two presentations
 
-| Mode | Présentation |
+| Mode | Presentation |
 | --- | --- |
-| `--classic` | Présentation indexée d’origine en 4:3 ; mode par défaut. |
-| `--modern` | Décor large 16:9, sprites originaux harmonisés, éclairage et environnement animés. |
+| `--classic` | Original indexed presentation in 4:3; the default mode. |
+| `--modern` | Widescreen 16:9 backdrop, harmonised original sprites, animated lighting and environment. |
 
-La fenêtre initiale fait 1280 × 960 en classique et 1280 × 720 en moderne.
-Le viewport conserve le rapport du mode choisi ; des bandes peuvent apparaître
-sur un écran d’un autre format. Le rendu suit la taille de sortie et le mode HiDPI.
+The initial window is 1280 × 960 in classic mode and 1280 × 720 in modern mode.
+The viewport preserves the selected aspect ratio; other display shapes may
+show borders. Rendering follows the output size and supports HiDPI.
 
-### Johnny et les autres sprites
+### Johnny and the other sprites
 
-Johnny est rendu **exclusivement depuis l’atlas indexé R8 original**, dans les
-scènes normales comme dans la démonstration de marche. Il n’y a plus de bascule
-vers un Johnny peint au milieu d’une animation.
+Johnny is rendered **exclusively from the original indexed R8 atlas**, both in
+normal scenes and in the walking preview. He no longer switches to a painted
+replacement halfway through an animation.
 
-Le matériau GPU moderne apporte :
+The modern GPU material provides:
 
-- palette harmonisée, peau chaude, blancs légèrement ivoire et traits brun profond ;
-- fusion des damiers détectés en lumière linéaire, y compris les petits motifs 2 × 2 ;
-- filtre directionnel de voisinage 3 × 3 pour atténuer les escaliers diagonaux ;
-- atténuation des éclats blancs isolés dans les parties sombres de Johnny ;
-- traitement sobre de Johnny : biseautage désactivé et rim-light fortement réduit ;
-- conservation des grands blancs du short et de la casquette, et des yeux lisibles ;
-- éclairage ambiant continu, relief léger et lumière de contour selon le matériau ;
-- traits primitifs, dont le fil de pêche, avec couverture alpha à la résolution de sortie.
+- A harmonised palette: warm skin, slightly ivory whites and deep brown outlines.
+- Linear-light fusion of detected checkerboard dithering, including small 2 × 2 patterns.
+- A directional 3 × 3 neighbourhood filter to soften diagonal stair steps.
+- Reduced isolated white speckles in Johnny's dark areas.
+- A restrained treatment for Johnny: no bevel shading and greatly reduced rim lighting.
+- Preserved white shorts and cap, with readable eyes.
+- Continuous ambient lighting, subtle relief and material-dependent rim lighting.
+- Output-resolution alpha coverage for primitive lines, including the fishing line.
 
-Le traitement spécifique de la peau et des détails de Johnny cible ses ressources.
-Les accessoires et les autres personnages conservent leur matériau ; les sprites
-composites gardent leur assemblage et leur palette partagée. Le filtre améliore
-la présentation à grande taille sans inventer de nouveaux détails du dessin.
+Johnny's skin and detail treatment targets his own resources. Props and other
+characters retain their existing material; composite sprites preserve their
+authored assembly and shared palette. The filter improves presentation at large
+sizes without inventing new drawing detail.
 
-### Palmier et contacts avec les animations
+### Palm tree and animation contact points
 
-Le palmier utilise désormais **toujours les sprites originaux**, également en
-mode moderne. Son tronc, sa couronne, les morceaux animés et les feuilles détachées
-partagent ainsi la géométrie des scripts. Le gag de lecture et de noix de coco
-n’alterne plus entre une couronne peinte et un morceau rétro.
+The palm tree **always uses the original sprites**, including in modern mode.
+Its trunk, crown, animated parts and detached leaves therefore share the
+geometry expected by the scripts. The reading and coconut gags no longer switch
+between a painted crown and a retro animated fragment.
 
-Un vent léger anime les palmes, en gardant les attaches fixes. Il est désactivé
-dès le début des scènes sensibles au tronc, aux noix de coco ou à la couronne,
-pour préserver leurs contacts et leur mouvement comique.
+A light breeze moves the fronds while keeping attachment points fixed. Wind is
+disabled from the start of scenes involving sensitive trunk, coconut or crown
+interactions, preserving contact points and the original comic motion.
 
-Les anciennes planches PNG/JCR de Johnny et la maquette peinte du palmier ont
-été supprimées : **44 fichiers, 168,25 Mio retirés**. Les métadonnées obsolètes et leurs outils de traitement sont également
-retirés. Les options anciennes
-`--johnny-hd` et `--palm-original` ne réactivent aucune texture retirée.
+The old Johnny PNG/JCR sheets and painted palm replacement were removed:
+**44 files, saving 168.25 MiB**. Obsolete metadata and their processing tools
+were also removed. The legacy `--johnny-hd` and `--palm-original` options do not
+restore any removed textures.
 
-### Mer, rivage et sable
+### Sea, shoreline and sand
 
-- Houle et vaguelettes croisées, plus serrées vers l’horizon et filtrées selon
-  la résolution de sortie. Déformation UV discrète réservée à l’eau.
-- Relief apparent éclairé et petits reflets fragmentés : la mer s’anime surtout
-  par sa lumière, sans nouvelles textures ni simulation géométrique.
-- Reflets du soleil et de la lune suivant leur position visuelle.
-- Écume qui avance et reflue sur la plage ; bordure de sable humide.
-- Masque du rivage calculé au démarrage à partir du décor fourni, avec une
-  distance signée pour les transitions. Le sable intérieur et le rocher sont
-  exclus de la déformation de la mer.
-- Ombre légère des nuages sur l’île.
+- Crossing swells and small wavelets, compressed toward the horizon and filtered
+  according to output resolution. Subtle UV distortion is restricted to water.
+- Lit surface relief and small, broken highlights: most of the motion comes
+  from changing light, without new textures or geometric simulation.
+- Sun and moon reflections following their visual positions.
+- Foam advancing and receding along the beach, with a wet sand edge.
+- A shoreline mask built at startup from the supplied backdrop, using a signed
+  distance for transitions. Interior sand and the rock are excluded from sea distortion.
+- Subtle cloud shadows across the island.
 
-Le fond artistique reste une illustration : les shaders animent sa présentation,
-pas une simulation physique complète de vagues ou de terrain.
+The backdrop remains an illustration. Shaders animate its presentation rather
+than simulate a complete physical ocean or terrain.
 
-### Ciel, jour/nuit et feu
+### Sky, day/night cycle and fire
 
-- Ciel procédural avec transitions continues jour, crépuscule et nuit.
-- Deux couches de nuages mobiles à vitesses différentes.
-- Soleil, lune et halos analytiques.
-- Étoiles fixes dans le ciel, scintillement lent, atténuation par les nuages et
-  disparition progressive à l’aube.
-- Lueur chaude du vrai feu des scènes 16–19 sur le sable, les sprites et le palmier.
-- Scintillement commun du feu, braises discrètes et flamme dédiée lisible la nuit.
+- Procedural sky with continuous day, dusk and night transitions.
+- Two moving cloud layers at different speeds.
+- Sun, moon and analytic halos.
+- Stationary stars with slow twinkling, cloud attenuation and a gradual fade at dawn.
+- Warm light from the actual campfires in scenes 16–19, affecting sand, sprites
+  and the palm tree.
+- Shared fire flicker, subtle embers and a dedicated flame material visible at night.
 
-L’horloge graphique est indépendante de la VM. `--time-lapse` accélère le jour
-visuel ; `--freeze-scene` laisse vivre le décor autour d’une pose figée.
-Les phases d’animation bouclent à 4 096 secondes sans saut au raccord testé.
-Les halos sont calculés dans les passes existantes : il n’y a pas de bloom HDR
-à flou multipasse dans cette version.
+The visual clock is independent of the VM. `--time-lapse` speeds up the visual
+day; `--freeze-scene` lets the environment move around a frozen animation pose.
+Animation phases wrap at 4,096 seconds, with a seamless transition in the tested case.
+Halos are calculated in existing passes; this version does not use multipass HDR bloom.
 
-### Ombres
+### Shadows
 
-Les sprites debout ont une ombre projetée et cisaillée. Les poses couchées,
-assises et le radeau utilisent une ombre de contact proche de leur silhouette.
-Le masque du sable limite les débordements dans l’eau.
+Standing sprites have projected, sheared shadows. Lying and sitting poses, along
+with the raft, use contact shadows close to their silhouettes. The sand mask
+limits spill into the water.
 
-Les ombres grises d’origine identifiées dans **551 sprites de 48 familles** sont neutralisées
-uniquement dans les copies GPU, pour éviter le doublon avec les ombres modernes.
-Les poses de noix de coco et de secouement du palmier (`MJCOCO.BMP`) sont
-incluses, ainsi que les poses auditées du feu, de la bouteille, du jogging,
-du radeau, des mouettes et d’autres scènes. Les masques s’appliquent aussi aux
-fragments découpés, même sans nouvelle ombre projetée.
-Les vêtements et éléments gris utiles sont préservés. Les zones non auditées
-restent traitées de manière conservatrice.
-Les trois sprites d’ombre séparée de la noix de coco (`COCONUTS.BMP`, 4 à 6)
-utilisent le matériau translucide des ombres modernes, dans la passe au sol.
-Les pixels gris de la noix elle-même ne sont pas supprimés.
+Original grey ground shadows identified in **551 sprites across 48 families**
+are removed only from the GPU copies to avoid doubling the modern shadows.
+Coverage includes coconut and palm-shaking poses (`MJCOCO.BMP`), plus reviewed
+fire, bottle, jogging, raft, seagull and other poses. Masks also apply to clipped
+fragments, even when no new projected shadow is emitted.
+
+Clothing and useful grey details are preserved. Unreviewed areas are handled
+conservatively. The three separate coconut shadow sprites (`COCONUTS.BMP`,
+frames 4–6) use the translucent modern ground-shadow material. Grey surface
+pixels on the coconut itself are preserved.
 
 ### Audio
 
-- **23 bruitages originaux** PCM mono 8 bits à 11 025 Hz.
-- Sortie Sokol Audio / ALSA ; rééchantillonnage linéaire vers la fréquence acceptée
-  par le périphérique et duplication sur les canaux stéréo.
-- Événements observés à chaque pas de VM, y compris lors des rattrapages.
-- Dernier bruitage prioritaire : un nouveau son interrompt le précédent.
-- Volume d’exécution de 0 à 100, par défaut 70 ; option muet et touche **M**.
-- Aucun périphérique audio ouvert en headless ; une erreur d’ouverture audio
-  est signalée sans arrêter l’animation.
+- **23 original sound effects**, stored as mono 8-bit PCM at 11,025 Hz.
+- Sokol Audio / ALSA output, with linear resampling to the accepted device rate
+  and duplication into stereo channels.
+- Sound events observed at every VM step, including catch-up steps.
+- Last sound takes priority: a new sound interrupts the previous one.
+- Runtime volume from 0 to 100, default 70; mute option and **M** toggle.
+- No audio device opened in headless mode. Audio initialisation failure is
+  reported without stopping the animation.
 
-Il n’y a pas de musique ni d’ambiance de vagues continue ajoutée. Une scène peut
-rester silencieuse longtemps ; les sauts avec `--skip-steps` ne rejouent pas les
-bruitages déjà passés. Les vidéos de validation peuvent être muettes.
+No music or continuous ocean ambience has been added. A scene can remain
+silent for a long time; `--skip-steps` does not replay sounds from skipped steps.
+Validation videos may be silent.
 
-## Commandes et prévisualisations
+## Commands and previews
 
-### Lanceurs fournis
+### Included launchers
 
-| Lanceur | Fonction |
+| Launcher | Behaviour |
 | --- | --- |
-| `preview-living.sh` | Scènes normales ; départ à 17 h, journée visuelle en 120 s. |
-| `preview-stars.sh` | Scènes normales ; départ à minuit avec étoiles. |
-| `preview-modern.sh` | Scènes normales, calendrier fixé à midi. |
-| `preview-hybrid.sh` | Pêche, scène 20 au pas 65, avant son premier bruitage utile. |
-| `preview-sleep.sh` | Repos/sommeil, scène 51, chapitre 6, au pas 150. |
-| `preview-reading-palm.sh` | Gag lecture/noix de coco, scène 35 au pas 125. |
-| `preview-reading-hd.sh [scène]` | Lecture, scène 34 par défaut ; 35 pour le gag. |
-| `preview-fishing-hd.sh [scène]` | Scène de pêche choisie ; 20 par défaut. |
-| `preview-scenes-hd.sh [scène]` | Scène 51 par défaut ; permet notamment 52 et 53. |
-| `preview-walk-hd.sh` | Boucle de marche isolée, sans progression de l’histoire. |
+| `preview-living.sh` | Normal scenes; starts at 17:00, with a 120-second visual day. |
+| `preview-stars.sh` | Normal scenes; starts at midnight with stars. |
+| `preview-modern.sh` | Normal scenes with the calendar fixed at noon. |
+| `preview-hybrid.sh` | Fishing scene 20 at step 65, before its first useful sound effect. |
+| `preview-sleep.sh` | Rest/sleep scene 51, chapter 6, at step 150. |
+| `preview-reading-palm.sh` | Reading/coconut gag, scene 35 at step 125. |
+| `preview-reading-hd.sh [scene]` | Reading; scene 34 by default, or 35 for the gag. |
+| `preview-fishing-hd.sh [scene]` | Selected fishing scene; scene 20 by default. |
+| `preview-scenes-hd.sh [scene]` | Scene 51 by default; also supports scenes such as 52 and 53. |
+| `preview-walk-hd.sh` | Isolated walking loop, without story progression. |
 
-Les noms contenant `hd` sont historiques : le personnage reste en sprites R8.
-Tous ces lanceurs emploient un calendrier fixe et préservent la sauvegarde réelle.
-Pour les scripts acceptant un numéro de scène, le passer **avant** les options :
+Launcher names containing `hd` are historical: the character still uses R8
+sprites. All these launchers use a fixed calendar and preserve the real save.
+For scripts accepting a scene number, put it **before** other options:
 
 ```sh
 ./preview-reading-hd.sh 35 --fullscreen
 ./preview-scenes-hd.sh 52 --fullscreen
 ```
 
-### Exemples directs
+### Direct examples
 
 ```sh
-# Présentation d’origine
+# Original presentation
 ./johnny-hd2d --classic --fullscreen
 
-# Scène de lecture reproductible
+# Reproducible reading scene
 ./johnny-hd2d --modern --scene 34 --seed 1 --clock 2026-10-18T12:00 --fullscreen
 
-# Feu de camp, nuit et pose figée ; l’environnement continue de bouger
+# Campfire at night, with the VM frozen and the environment still moving
 ./johnny-hd2d --modern --scene 16 --skip-steps 400 --seed 4242 --clock 2026-10-18T00:00 --freeze-scene --fullscreen
 
-# Désactiver l’interpolation pour comparer les déplacements discrets
+# Disable interpolation to compare discrete movement
 ./preview-hybrid.sh --fullscreen --no-interpolation
 
-# Comparer avec le ciel illustré et la présentation antérieure du décor
+# Compare with the earlier illustrated sky and backdrop presentation
 ./preview-modern.sh --fullscreen --no-decor-fx
 
-# Lister le catalogue
+# List the scene catalogue
 ./johnny-hd2d --list-scenes
 ```
 
-`--scene` force le choix d’une scène de test ; sa durée et sa fin suivent ses
-scripts. `--walk-demo` est une démonstration isolée et ne montre pas les autres scènes.
+`--scene` forces a test scene; its duration and ending still follow its scripts.
+`--walk-demo` is an isolated preview and does not play the other scenes.
 
-## Toutes les options
+## All command-line options
 
-La référence exécutable est `./johnny-hd2d --help`.
+The executable reference is `./johnny-hd2d --help`.
 
-| Option | Effet et contraintes |
+| Option | Behaviour and constraints |
 | --- | --- |
-| `--modern` | Active la présentation moderne. |
-| `--classic` | Active la présentation classique ; valeur par défaut. |
-| `--fullscreen` | Ouvre directement en plein écran. |
-| `--data DIR` | Dossier des trois fichiers originaux. |
-| `--modern-plate FILE` | Remplace le décor par un fichier JCR1 ; le calage doit rester compatible. |
-| `--palm-original` | Compatibilité avec les anciens lanceurs ; le palmier original est déjà systématique. |
-| `--johnny-hd` | Compatibilité historique, nécessite le mode moderne ; Johnny reste en R8. |
-| `--walk-demo` | Marche isolée ; implique le mode moderne et midi si aucune horloge n’est fournie. |
-| `--no-interpolation` | Affiche les positions discrètes entre compositions. |
-| `--no-decor-fx` | Désactive les nouveaux effets du décor et conserve la présentation illustrée antérieure ; ce n’est pas le mode classique. |
-| `--time-lapse N` | Journée visuelle en N secondes, de 24 à 3 600 ; calendrier VM inchangé. |
-| `--freeze-scene` | Fige la VM en fenêtre, sans arrêter l’horloge du décor. |
-| `--decor-time N` | Fixe le temps graphique à N secondes, de 0 à 1 000 000, pour les captures. |
-| `--clock YYYY-MM-DDTHH:MM` | Injecte une date/heure locale fixe et désactive la sauvegarde normale. |
-| `--seed N` | Graine numérique non négative pour le RNG ; heure courante par défaut. |
-| `--story-day N` | Chapitre de test de 1 à 11. |
-| `--scene N` | Force une scène du catalogue de 1 à 79. |
-| `--skip-steps N` | Avance de 0 à 6 000 compositions avant l’affichage ; nécessite `--scene`. |
-| `--list-scenes` | Affiche le catalogue et quitte sans ouvrir de fenêtre. |
-| `--volume N` | Volume de 0 à 100, 70 par défaut ; ne modifie pas l’INI. |
-| `--mute` | Démarre muet ; la touche M permet de réactiver le son. |
-| `--audio-test` | Trois bips de diagnostic sans fenêtre ni données originales. |
-| `--headless N` | Exécute de 0 à 1 000 000 pas sans fenêtre ni audio et affiche un hash du flux logique. |
-| `--verify` | Avec `--headless`, reconstruit les commandes capturées sur CPU et compare chaque pixel au canvas logique. |
-| `--snapshot FILE.ppm` | Avec `--headless`, exporte la dernière image logique 640 × 480 ; ce n’est pas une capture du rendu moderne. |
-| `--smoke` | Ferme après 240 images soumises en fenêtre et affiche les compteurs. |
-| `--help` | Affiche l’aide et quitte. |
+| `--modern` | Enables modern presentation. |
+| `--classic` | Enables classic presentation; the default. |
+| `--fullscreen` | Opens directly in fullscreen. |
+| `--data DIR` | Directory containing the three original game files. |
+| `--modern-plate FILE` | Uses a JCR1 backdrop; its alignment must remain compatible. |
+| `--palm-original` | Legacy launcher compatibility; the original palm is already always used. |
+| `--johnny-hd` | Legacy compatibility, requiring modern mode; Johnny still uses R8 sprites. |
+| `--walk-demo` | Isolated walking preview; implies modern mode and noon unless a clock is supplied. |
+| `--no-interpolation` | Shows discrete positions between composition steps. |
+| `--no-decor-fx` | Disables the newer environment effects and keeps the earlier illustrated backdrop presentation; this is not classic mode. |
+| `--time-lapse N` | Visual day lasting N seconds, from 24 to 3,600; leaves the VM calendar unchanged. |
+| `--freeze-scene` | Freezes the VM while the application stays open and the environment clock continues. |
+| `--decor-time N` | Fixes visual time at N seconds, from 0 to 1,000,000, for captures. |
+| `--clock YYYY-MM-DDTHH:MM` | Injects a fixed local date/time and disables normal save persistence. |
+| `--seed N` | Non-negative numeric RNG seed; defaults to the current time. |
+| `--story-day N` | Test chapter, from 1 to 11. |
+| `--scene N` | Forces a scene from the catalogue, from 1 to 79. |
+| `--skip-steps N` | Advances 0 to 6,000 composition steps before display; requires `--scene`. |
+| `--list-scenes` | Prints the catalogue and exits without opening a window. |
+| `--volume N` | Volume from 0 to 100, default 70; does not change the INI. |
+| `--mute` | Starts muted; press M to restore sound. |
+| `--audio-test` | Plays three diagnostic beeps without a window or original game data. |
+| `--headless N` | Runs 0 to 1,000,000 steps without a window or audio and prints a logical command-stream hash. |
+| `--verify` | With `--headless`, reconstructs captured commands on the CPU and compares every pixel with the logical canvas. |
+| `--snapshot FILE.ppm` | With `--headless`, exports the final 640 × 480 logical frame; this is not a modern-renderer screenshot. |
+| `--smoke` | Closes after 240 submitted windowed frames and prints counters. |
+| `--help` | Prints help and exits. |
 
-`--walk-demo` ne se combine pas avec `--scene` ou `--list-scenes`.
-`--audio-test` ne se combine pas avec `--headless` ou `--list-scenes`.
-Les options purement graphiques ne produisent aucun rendu Vulkan en headless ;
-`--freeze-scene` n’y bloque pas les pas explicitement demandés.
+`--walk-demo` cannot be combined with `--scene` or `--list-scenes`.
+`--audio-test` cannot be combined with `--headless` or `--list-scenes`.
+Purely visual options do not produce Vulkan output in headless mode;
+`--freeze-scene` does not block explicitly requested headless steps.
 
-## Progression et configuration
+## Progress and configuration
 
-Une session normale lit puis sauvegarde `SCRANTIC.INI` **à côté du binaire**.
-Le fichier est écrit à la fermeture normale, y compris l’arrêt géré par SIGTERM
-ou SIGINT, avec fichier temporaire puis renommage atomique. Une configuration
-invalide provoque un avertissement et l’utilisation de valeurs par défaut sans
-écraser le fichier existant.
+A normal session reads and saves `SCRANTIC.INI` **beside the executable**.
+The file is written on normal shutdown, including handled SIGTERM or SIGINT,
+using a temporary file and an atomic rename. Invalid configuration triggers a
+warning and default values without overwriting the existing file.
 
-La section reconnue est `[ScreenSaver.ScreenAntics]`. Les clés héritées sont
+The recognised section is `[ScreenSaver.ScreenAntics]`. Inherited keys are
 `background`, `clouds`, `waves`, `sounds`, `numdays`, `introduction`,
-`currentyear`, `currentmonth`, `currentday` et `starttime`. Elles pilotent la
-configuration logique d’origine ; elles ne constituent pas un panneau de réglage
-individuel de tous les nouveaux shaders.
+`currentyear`, `currentmonth`, `currentday` and `starttime`. They control the
+original logical configuration; they are not individual controls for every
+new shader effect.
 
-Le son respecte `sounds=0` en session normale. `--volume`, `--mute` et la touche M
-ne réécrivent pas ce réglage dans l’INI.
+Normal sessions respect `sounds=0`. `--volume`, `--mute` and M do not rewrite
+that INI setting.
 
-Les exécutions headless, le catalogue, le smoke test et les modes de
-prévisualisation (`--walk-demo`, horloge fixe, scène ou chapitre forcé, cycle
-accéléré, scène figée ou temps graphique fixé) ne chargent ni ne sauvegardent la
-progression réelle. `--seed` seul ne désactive pas la persistance.
-Le dossier de l’exécutable doit être inscriptible pour sauvegarder une session.
+Headless runs, catalogue listing, smoke tests and preview modes (`--walk-demo`,
+a fixed clock, forced scene or chapter, accelerated visual cycle, frozen scene
+or fixed visual time) neither load nor save real progress. `--seed` alone does
+not disable persistence. The executable directory must be writable to save a session.
 
-## Compilation
+## Building
 
-### Dépendances
+### Dependencies
 
-Compilateur C99 avec prise en charge LTO, GNU Make, en-têtes et bibliothèques
-X11/Xi/Xcursor, Vulkan et ALSA. Le Makefile lie `X11`, `Xi`, `Xcursor`, `vulkan`,
-`asound`, `dl`, `m` et les threads POSIX. Sur Arch/CachyOS, ALSA est fourni par
-`alsa-lib`. Le pilote Vulkan et le chargeur doivent être installés séparément.
+A C99 compiler with LTO support, GNU Make, and X11/Xi/Xcursor, Vulkan and ALSA
+headers and libraries. The Makefile links `X11`, `Xi`, `Xcursor`, `vulkan`,
+`asound`, `dl`, `m` and POSIX threads. On Arch/CachyOS, ALSA is provided by
+`alsa-lib`. The Vulkan driver and loader must be installed separately.
 
 ```sh
 make
 make size
 ```
 
-Les shaders SPIR-V sont déjà fournis dans `generated/` : **sokol-shdc n’est pas
-nécessaire pour une compilation normale**. Après modification des GLSL :
+Generated SPIR-V shaders are included in `generated/`: **sokol-shdc is not
+required for a normal build**. After editing GLSL sources:
 
 ```sh
-make shaders SHDC=/chemin/vers/sokol-shdc
+make shaders SHDC=/path/to/sokol-shdc
 make
 ```
 
-Le code compile avec `-std=c99 -Wall -Wextra -Wpedantic -Werror`. Sokol est
-sélectionné avec `SOKOL_VULKAN`. Les headers fournis sont épinglés au commit
-`efeb77603e24daea7d1dd6445b9358bb5d82533b` ; voir `vendor/REVISION`.
+The code builds with `-std=c99 -Wall -Wextra -Wpedantic -Werror`. Sokol is selected
+with `SOKOL_VULKAN`. Bundled headers are pinned to commit
+`efeb77603e24daea7d1dd6445b9358bb5d82533b`; see `vendor/REVISION`.
 
-Compression facultative avec UPX, fourni séparément :
+Optional compression using UPX, supplied separately:
 
 ```sh
-make compact UPX_BIN=/chemin/vers/upx
+make compact UPX_BIN=/path/to/upx
 ./johnny-hd2d-compact --modern --fullscreen
 ```
 
-`make clean` retire les deux exécutables ; il ne supprime pas les données du jeu.
+`make clean` removes both executables; it does not delete the game data.
 
-### Format du décor
+### Backdrop format
 
-JCR1 contient la signature `JCR1`, largeur et hauteur uint32 little endian,
-puis les pixels RGBA8 non compressés. Le moteur charge directement ce format,
-sans décodeur JPEG ou PNG embarqué. Pillow n’est requis que pour la conversion :
+JCR1 consists of the `JCR1` signature, little-endian uint32 width and height,
+then uncompressed RGBA8 pixels. The engine loads this format directly, with no
+embedded JPEG or PNG decoder. Pillow is only required for conversion:
 
 ```sh
-python3 tools/pack_plate.py source.png decor.jcr
-./johnny-hd2d --modern --modern-plate decor.jcr
+python3 tools/pack_plate.py source.png backdrop.jcr
+./johnny-hd2d --modern --modern-plate backdrop.jcr
 ```
 
-Un autre décor exige de vérifier les ancrages, l’occultation du tronc et le masque
-du sable ; remplacer une image arbitrairement ne suffit pas à recaler les scènes.
+A replacement backdrop requires checking anchors, trunk occlusion and the sand
+mask. Swapping in an arbitrary image does not align it with the original scenes.
 
 ## Architecture
 
 ```text
 johnny-hd2d/
-├── main.c                     CLI, fenêtre, horloges, boucle et fermeture
-├── vm_core.c / scene.h         Pont VM/rendu, double état et interpolation
-├── engine.c / config.c         Histoire, calendrier, RNG et progression INI
-├── resource.c                 Chargement et décompression des données originales
-├── ads.c / ttm.c               Interprétation des scripts
-├── island.c / walk.c           Logique de l’île et déplacements
-├── gfx.c / render_frame.c      Canvas de référence et capture des commandes
-├── renderer_vulkan.c           Atlas R8, passes Vulkan, matériaux et ombres
-├── environment.c               Atmosphère, masque du rivage, vent et feu
-├── audio.c / audio_mixer.c     Sortie ALSA, mixage et rééchantillonnage
-├── layout.h / palm_layout.h    Calage du décor et du palmier
-├── hybrid.h / sprite_material.h  Classification et matériaux des sprites
-├── shaders/                   Sources GLSL
-├── generated/                 Headers SPIR-V générés
-├── vendor/                    Headers Sokol et licences
-├── assets/original/           Données du jeu, uniquement dans la copie locale
-├── assets/modern/             Unique décor JCR actif et sa provenance
-├── tests/ / tools/            Tests C et outils de développement
-├── VALIDATION.md              Résumé actuel des vérifications
-└── work/                      Sorties temporaires de test, hors archive
+├── main.c                     CLI, window, clocks, loop and shutdown
+├── vm_core.c / scene.h         VM/render bridge, double state and interpolation
+├── engine.c / config.c         Story, calendar, RNG and INI progress
+├── resource.c                 Original data loading and decompression
+├── ads.c / ttm.c               Script interpretation
+├── island.c / walk.c           Island logic and movement
+├── gfx.c / render_frame.c      Reference canvas and command capture
+├── renderer_vulkan.c           R8 atlas, Vulkan passes, materials and shadows
+├── environment.c               Atmosphere, shoreline mask, wind and fire
+├── audio.c / audio_mixer.c     ALSA output, mixing and resampling
+├── layout.h / palm_layout.h    Backdrop and palm alignment
+├── hybrid.h / sprite_material.h  Sprite classification and materials
+├── shaders/                   GLSL sources
+├── generated/                 Generated SPIR-V headers and geometry masks
+├── vendor/                    Sokol headers and licences
+├── assets/original/           Game data, present only in the local copy
+├── assets/modern/             Single active JCR backdrop and provenance
+├── tests/ / tools/            C tests and development tools
+├── VALIDATION.md              Current validation notes
+└── work/                      Temporary test output, excluded from the archive
 ```
 
-Le renderer consomme les états de présentation ; les effets ne changent pas
-le canvas logique et ne consomment pas le RNG du scénario. Le numéro de scène
-sert notamment à verrouiller le vent pendant les interactions sensibles.
-Les compositions GDI non décomposables disposent d’un repli sur le canvas
-original harmonisé pour préserver leur résultat.
+The renderer consumes presentation states. Effects neither change the logical
+canvas nor consume the story RNG. Scene IDs are also used to lock wind during
+sensitive interactions. GDI compositions that cannot be decomposed fall back
+to the harmonised original canvas to preserve their result.
 
-## Tests et diagnostics
+## Tests and diagnostics
 
-### Tests C et mémoire
+### C tests and memory checks
 
-Les données originales doivent être présentes pour les tests qui les utilisent.
+Tests that use original game data require those files to be present.
 
 ```sh
 make test
 make sanitize TESTDIR=work/sanitize
 ```
 
-La suite couvre ressources, scripts, moteur, capture des commandes, calendrier,
-configuration, déplacements, lecture, pêche, ombres, audio et environnement.
-Le replay des **79 scènes / 30 537 images** compare exactement les pixels du
-canvas de référence ; cela ne signifie pas que chaque scène moderne a été
-inspectée visuellement. ASan/UBSan sont activés par `make sanitize` ; la détection
-de fuites est désactivée par cette cible (`detect_leaks=0`).
+The suite covers resources, scripts, engine behaviour, command capture,
+calendar, configuration, movement, reading, fishing, shadows, audio and the
+environment. Replays of **79 scenes / 30,537 frames** compare the reference
+canvas pixels exactly; this does not mean every modern scene has been visually
+reviewed. `make sanitize` enables ASan/UBSan and disables leak detection
+(`detect_leaks=0`).
 
-Exemple de contrôle sans GPU et d’export logique :
+Example of a GPU-free check and logical frame export:
 
 ```sh
-./johnny-hd2d --headless 1000 --seed 4242 --clock 2026-10-18T17:00 --verify --snapshot /tmp/johnny-logique.ppm
+./johnny-hd2d --headless 1000 --seed 4242 --clock 2026-10-18T17:00 --verify --snapshot /tmp/johnny-logical.ppm
 ```
 
-Le hash dépend de tous les paramètres de départ : comparer des exécutions avec
-les mêmes données, graine, calendrier, chapitre et scène.
-`--verify` est une vérification CPU des commandes destinées au renderer,
-pas une lecture des pixels effectivement produits par le GPU.
+The hash depends on all starting parameters. Compare runs with the same data,
+seed, calendar, chapter and scene. `--verify` checks renderer commands on the CPU;
+it does not read back the pixels actually produced by the GPU.
 
-### Validation Vulkan et mesures GPU
+### Vulkan validation and GPU timing
 
-Avec la couche de validation Vulkan installée :
+With the Vulkan validation layer installed:
 
 ```sh
 VK_INSTANCE_LAYERS=VK_LAYER_KHRONOS_validation ./johnny-hd2d --modern --mute --smoke
 VK_INSTANCE_LAYERS=VK_LAYER_KHRONOS_validation ./johnny-hd2d --classic --mute --smoke
 ```
 
-Outils manuels fournis :
+Included manual tools:
 
 ```sh
 python3 tools/test_material_gpu.py
@@ -474,116 +477,117 @@ python3 tools/bench_environment.py
 make inventory
 ```
 
-Les contrôles visuels nécessitent une session Hyprland active, `hyprctl`, `grim`,
-Pillow, et NumPy pour l’environnement. Ils ouvrent leurs fenêtres et en capturent
-la zone ; ne pas les masquer pendant le test. Les résultats vont dans `work/`.
-Le benchmark compile une variante temporaire instrumentée avec timestamps GPU ;
-il ne mesure pas la fréquence de présentation complète de l’application.
-`make inventory` régénère l’inventaire depuis les scènes originales.
+Visual checks require an active Hyprland session, `hyprctl`, `grim`, Pillow,
+and NumPy for the environment checks. They open their own windows and capture
+the window area; keep those windows visible during testing. Results go into
+`work/`. The benchmark builds a temporary variant instrumented with GPU
+timestamps; it does not measure the application's complete presentation rate.
+`make inventory` rebuilds the inventory from the original scenes.
 
-Les anciens outils de traitement de planches RGBA et leur métadonnées ont été
-retirés. `make inventory` produit son inventaire local dans `assets/scenes/`,
-non distribué et ignoré par Git.
+Obsolete RGBA sheet processing tools and metadata have been removed.
+`make inventory` writes its local inventory to `assets/scenes/`, which is
+excluded from the distribution and ignored by Git.
 
-### Dépannage
+### Troubleshooting
 
-| Symptôme | Vérification |
+| Symptom | What to check |
 | --- | --- |
-| `aucun fichier ou dossier de ce nom` pour un lanceur | Revenir dans le dossier du projet ou employer son chemin absolu ; ne pas séparer `./preview-living.sh` et ses arguments par un retour à la ligne non échappé. |
-| Erreur de données au démarrage | Vérifier les trois fichiers, leur casse et `--data`. |
-| Fenêtre absente sous Wayland | Vérifier XWayland, la session graphique et le pilote Vulkan ; le backend de fenêtre actuel utilise X11. |
-| Décor moderne introuvable | Conserver `assets/modern/` à côté de l’exécutable ou passer `--modern-plate`. |
-| Seulement une marche autour du palmier | Retirer `--walk-demo` ou le lanceur de marche ; utiliser `preview-living.sh` pour les scènes normales. |
-| Aucun son | Vérifier M, `--mute`, `--volume`, `sounds=0` et les messages ALSA ; essayer `./johnny-hd2d --audio-test`. |
-| Trois bips audibles mais scène silencieuse | Certaines scènes ont peu de sons ; essayer `./preview-hybrid.sh`, qui commence avant le bruitage de pêche. |
-| Pas d’étoiles | Tester `preview-stars.sh` ; les étoiles s’effacent de jour, sous les nuages et dans les replis composites. |
-| Progression non sauvegardée | Vérifier qu’aucun mode de prévisualisation n’est actif et que le dossier du binaire est inscriptible. |
+| `No such file or directory` when starting a launcher | Return to the project directory or use its absolute path. Keep `./preview-living.sh` and its arguments on the same line, or escape the line break. |
+| Data error at startup | Check all three files, their case-sensitive names and `--data`. |
+| No window under Wayland | Check XWayland, the graphical session and Vulkan driver; the current window backend uses X11. |
+| Modern backdrop not found | Keep `assets/modern/` beside the executable or pass `--modern-plate`. |
+| Only walking around the palm tree | Remove `--walk-demo` or the walking launcher; use `preview-living.sh` for normal scenes. |
+| No audio | Check M, `--mute`, `--volume`, `sounds=0` and ALSA messages; try `./johnny-hd2d --audio-test`. |
+| Three diagnostic beeps work, but a scene is silent | Some scenes contain few sounds. Try `./preview-hybrid.sh`, which starts before the fishing sound effect. |
+| No stars | Try `preview-stars.sh`; stars fade during daylight, under clouds and in composite fallbacks. |
+| Progress is not saved | Check that no preview mode is active and the executable directory is writable. |
+| An opaque grey shadow remains | Reviewed sprite masks and separate coconut shadows are handled in modern mode. Rare composite fallbacks and unreviewed areas may still retain original shadows. |
 
-## Performances et taille
+## Performance and size
 
-### Mémoire et cadence
+### Memory and frame timing
 
-Le staging Vulkan est borné à **7 Mio** : copie 1 Mio, buffers transitoires
-2 Mio × 2 images en vol et relais atlas 2 Mio. Ce chiffre ne représente pas
-la mémoire totale du programme ou du pilote.
+Vulkan staging is bounded at **7 MiB**: 1 MiB copy buffer, 2 MiB transient buffers
+for each of two frames in flight, and a 2 MiB atlas relay. This is not the total
+memory used by the program or driver.
 
-Le masque du rivage fait **640 × 360 RGBA8**, soit 921 600 octets
-(**0,88 Mio GPU**). Sa construction demande environ **3,30 Mio CPU temporaires**,
-libérés après l’upload. Aucune planche RGBA de Johnny ou du palmier peint n’est
-chargée ; l’image artistique utilisée au démarrage moderne est le décor JCR.
+The shoreline mask is **640 × 360 RGBA8**, or 921,600 bytes (**0.88 MiB on the
+GPU**). Building it requires approximately **3.30 MiB of temporary CPU memory**,
+freed after upload. No Johnny or painted-palm RGBA sheets are loaded; the JCR
+backdrop is the artwork loaded at modern startup.
 
-Les mesures conservées sur Radeon 780M à 1920 × 1080 donnent environ
-**1,6 à 1,8 ms en moyenne pour la passe graphique** du décor vivant. Elles
-précèdent le retrait du palmier peint ; elles restent des mesures de ce jalon,
-pas un benchmark du paquet allégé actuel. La VSync est active et le débit dépend
-de l’écran, du compositeur et du reste de la boucle. **144 FPS soutenus ne sont
-pas garantis ni démontrés par ces mesures.**
+Measurements recorded on **19 October 2026**, with the wavelet shader on a
+Radeon 780M at 1920 × 1080, averaged **1.70 ms for the graphics pass in daylight,
+1.72 ms at night and 1.76 ms with fire**, over 209 samples after warm-up.
+These measurements preceded the latest shadow fixes and exclude CPU work,
+uploads and presentation latency. They are not an end-to-end benchmark of the
+current package. VSync is enabled; throughput depends on the display,
+compositor and the rest of the loop. **Sustained 144 fps is neither guaranteed
+nor demonstrated by these timings.**
 
-### Distribution minimale
+### Minimal distribution
 
-Le dépôt conserve le code, les tests et outils actifs, les shaders, les licences,
-le décor JCR utilisé et une seule vidéo de présentation. Les anciennes captures,
-GIF, vidéos, variantes de décors, PNG redondants, métadonnées de planches
-retirées et journaux historiques ne sont plus distribués. Le binaire compact
-se génère avec `make compact` ; il n’est plus livré en double.
+The repository keeps the code, active tests and tools, shaders, licences, the
+JCR backdrop in use and one demo video. Old screenshots, GIFs, videos, backdrop
+variants, duplicate PNGs, removed-sheet metadata and historical logs are no
+longer distributed. The compressed executable can be built with `make compact`;
+a duplicate binary is no longer included.
 
-Un paquet d’exécution séparé ne contient que l’exécutable standard, le décor
-JCR, les notices, un court guide et les deux lanceurs jour/nuit. Aucun code,
-test, outil de compilation ou média de présentation n’est nécessaire au runtime.
-Les trois données originales restent à fournir séparément.
+A separate local runtime package contains only the standard executable, JCR
+backdrop, notices, a short guide and the two day/night launchers. No source code,
+tests, build tools or demo media are needed at runtime. The three original game
+files must still be supplied separately.
 
-Mesures et périmètres : [SIZE.md](SIZE.md). Le format Mio vaut 1 048 576 octets.
-La taille des bibliothèques système n’est pas incluse. Les anciens gros assets
-restent dans l’historique Git ; pour un téléchargement allégé, choisir le ZIP de
-la branche courante ou `git clone --depth 1`.
+Measurements and package scopes: [SIZE.md](SIZE.md). One MiB is 1,048,576 bytes.
+System libraries are not included in these sizes. Old large assets remain in
+Git history; use the current branch ZIP or `git clone --depth 1` for a smaller download.
 
-## Limites connues
+## Known limitations
 
-- Les rares compositions GDI non décomposables gardent le canvas original
-  harmonisé, sans ombres individuelles ni nouveaux effets de décor. La fidélité
-  des assemblages prime dans ces cas ; une différence de présentation peut rester visible.
-- Les masques et ancrages sont adaptés au décor enregistré fourni. Le détourage
-  des rochers et certaines zones d’ombre restent conservateurs.
-- Le de-dithering détecte des motifs : il ne remplace pas une retouche artistique
-  exhaustive de chaque sprite et ne supprime pas tous les damiers possibles.
-- Le vent est volontairement absent de plusieurs scènes sensibles, même lorsqu’un
-  mouvement discret pourrait sembler souhaitable.
-- Les shaders ne créent pas de nouvelles poses et ne rendent pas les mouvements
-  internes de chaque sprite aussi continus que ses déplacements interpolés.
-- Pas de géométrie 3D complète, de bloom HDR multipasse, de musique ajoutée ou
-  de contrôle graphique individuel de tous les effets.
-- La fenêtre est opaque. Le fond d’écran transparent, l’intégration layer-shell,
-  le démarrage automatique et le verrouillage de session ne sont pas implémentés.
-  Le programme se lance actuellement comme une application, pas comme un service
-  d’économiseur d’écran intégré au bureau.
-- Le plein écran se choisit au lancement ; aucun raccourci de bascule n’est fourni.
-- Les captures de validation attestent des cas testés, pas d’une validation
-  visuelle exhaustive des 79 scènes sur tous les pilotes.
+- Rare GDI compositions that cannot be decomposed retain the harmonised original
+  canvas, without individual shadows or the newer environment effects. Assembly
+  fidelity is preserved, but a presentation difference may remain visible.
+- Masks and anchors are tuned to the supplied, registered backdrop. Rock outlines
+  and some shadow regions are handled conservatively.
+- De-dithering is pattern-based. It is not an exhaustive artistic retouch of every
+  sprite and does not remove every possible checkerboard pattern.
+- Wind is deliberately disabled in several sensitive scenes, even where subtle
+  motion might otherwise be desirable.
+- Shaders do not create new animation poses. Internal sprite animation is not
+  made as continuous as interpolated movement.
+- No complete 3D geometry, multipass HDR bloom, added music or individual UI
+  controls for every graphical effect.
+- The window is opaque. Transparent wallpaper mode, layer-shell integration,
+  autostart and session locking are not implemented. The program currently runs
+  as an application, not as a desktop-integrated screensaver service.
+- Fullscreen is selected at startup; no runtime toggle shortcut is provided.
+- Validation captures document the tested cases, not an exhaustive visual review
+  of all 79 scenes on every driver.
 
-## Vérifications et vidéo
+## Validation and video
 
-Le document [VALIDATION.md](VALIDATION.md) résume les contrôles et leurs limites.
-Les journaux temporaires sont produits dans `work/` ; ils ne font pas partie
-de la distribution. La [vidéo de présentation](johnny-castaway-linkedin.mp4)
-montre les captures réelles classique/moderne/crépuscule/nuit avec feu.
-Elle est muette ; le son du programme se teste dans l’application.
+[VALIDATION.md](VALIDATION.md) records checks and their limits. Temporary logs
+are written to `work/` and are not part of the distribution.
+The [demo video](johnny-castaway-linkedin.mp4) contains actual captures of the
+classic, modern, sunset and night/campfire presentations. It is silent; test
+the application's sound in the program itself.
 
-## Origine du portage et licences
+## Port origins and licences
 
-Le cœur provient principalement du portage
+The core is primarily based on
 [open-scrantic](https://github.com/glauberlima/open-scrantic/tree/2db75008931eb744f79d0c3fb12e0d89950466ff),
-révision `2db75008931eb744f79d0c3fb12e0d89950466ff`, adapté en C99.
-La licence MIT et les attributions sont conservées dans `LICENSE` et
+revision `2db75008931eb744f79d0c3fb12e0d89950466ff`, adapted to C99.
+Its MIT licence and attributions are preserved in `LICENSE` and
 `licenses/open-scrantic-MIT.txt`.
 
 [jc_reborn](https://github.com/jno6809/jc_reborn/tree/524a5803e4fa65f840379c781f40ce39a927032e)
-a servi de seconde référence ; aucun de ses fichiers GPL n’a été incorporé.
-Les dépendances ont leurs propres notices dans `vendor/` et `licenses/`.
-Les illustrations modernes ont leur provenance décrite dans `assets/modern/`.
+served as a second reference; none of its GPL source files were incorporated.
+Dependencies have their own notices in `vendor/` and `licenses/`. The provenance
+of the modern artwork is documented in `assets/modern/`.
 
-Les données du jeu original restent distinctes du code du portage. Elles et
-`SCRANTIC.INI` sont exclues de l’archive. `SHA256SUMS` couvre les fichiers
-sélectionnés pour la distribution et peut être vérifié depuis sa racine :
+Original game data remains separate from the port's source code. It and
+`SCRANTIC.INI` are excluded from the distribution archive. `SHA256SUMS` covers
+the selected distribution files and can be checked from the package root:
 
 ```sh
 sha256sum -c SHA256SUMS
