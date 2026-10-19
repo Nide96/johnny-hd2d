@@ -78,8 +78,16 @@ static inline bool jc_hybrid_ground(float x, float y) {
   float dx = (x - 645.f) / 343.f, dy = (y - 505.f) / 85.f;
   return dx * dx + dy * dy < .98f * .98f;
 }
+/* These three sprites contain only the coconut's authored ground shadow.
+ * Frames 0..3 are the fruit: their seven grey surface pixels must survive. */
+static inline bool jc_hybrid_authored_shadow(const JCDraw *d) {
+  return !strcmp(d->resource, "COCONUTS.BMP") &&
+         d->source_sprite >= 4 && d->source_sprite <= 6;
+}
 static inline bool jc_hybrid_shadow(const JCDraw *d, float x, float y, float w,
                                     float h) {
+  if (jc_hybrid_authored_shadow(d))
+    return false; /* Its silhouette is already projected onto the ground. */
   if ((!strcmp(d->resource, "SLEEP.BMP") && d->source_sprite == 12) ||
       (!strcmp(d->resource, "STNDLAY.BMP") && d->source_sprite == 8) ||
       (!strcmp(d->resource, "JOHNWALK.BMP") && d->source_sprite == 13))

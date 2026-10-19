@@ -520,6 +520,9 @@ bool renderer_frame(Renderer *r, const SceneState *s, sg_swapchain sc,
     bool shadow_only = layered && pass == 0;
     for (size_t i = 0; i < count; ++i) {
       const JCDraw *d = layered ? &f->actors[i] : &f->draws[i];
+      bool authored_shadow = layered && jc_hybrid_authored_shadow(d);
+      if (authored_shadow && !shadow_only)
+        continue;
       float x, y;
       if (layered)
         jc_render_actor_position(f, s->previous, i, scene_alpha(s),
@@ -567,7 +570,7 @@ bool renderer_frame(Renderer *r, const SceneState *s, sg_swapchain sc,
         continue;
       }
       float bottom = layered ? (float)r->body[i].bottom / d->h : 1.f;
-      if (shadow_only && !r->casts_shadow[i])
+      if (shadow_only && !r->casts_shadow[i] && !authored_shadow)
         continue;
       draw_params_t p = {
           .rect = {x, y, dw, dh},
@@ -589,6 +592,13 @@ bool renderer_frame(Renderer *r, const SceneState *s, sg_swapchain sc,
           modern && (layered ? r->johnny_material[i] : jc_hybrid_johnny(d))
               ? 1.f
               : 0.f;
+      if (authored_shadow) {
+        /* Reuse the soft, translucent ground material at the authored position,
+         * once in the shadow pass. Do not project this flat shape a second time. */
+        p.projection[2] = 1.f;
+        p.material[0] = 1.f;
+        p.material[1] = 0.f;
+      }
       p.material[3] = layered && r->environment_enabled &&
                       !strcmp(d->resource, "FIRE1.BMP") ? 1.f : 0.f;
       if (layered && d->line) {

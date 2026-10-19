@@ -1,5 +1,22 @@
 # Validation du paquet allégé — 19 octobre 2026
 
+## Ombre indépendante de la noix de coco
+
+La pose signalée est reproduite en scène 6, pas 85, graine 4242. Elle associe
+COCOHEAD.BMP:8, une tête séparée, la noix COCONUTS.BMP:3 et son ombre :6.
+Les sprites COCONUTS:4 à :6 sont des silhouettes grises autonomes, ignorées
+jusqu’ici par les masques de corps. Ils passent désormais une seule fois dans
+la passe des ombres, avec le matériau translucide bleu sombre et le masque
+du sable, sans seconde projection. Aucun index gris n’est supprimé sur la noix.
+
+- Test des 37, 85 et 119 pixels gris des trois silhouettes d’ombre ; contrôle
+  des sept pixels gris de chacune des quatre poses du fruit, conservés.
+- make test et test hybrid ASan/UBSan réussis.
+- Captures Vulkan avant/après de la pose, contrôle de nuit, classique avant/après
+  identique pixel par pixel ; zéro erreur de validation.
+- La base du tronc visible entre les jambes est conservée : elle fait partie
+  du palmier situé derrière Johnny, et non de son ombre.
+
 ## Extension des masques d’ombres grises
 
 La couverture passe de 142 à 551 poses réparties dans 48 familles : 91 324

@@ -214,6 +214,9 @@ du radeau, des mouettes et d’autres scènes. Les masques s’appliquent aussi 
 fragments découpés, même sans nouvelle ombre projetée.
 Les vêtements et éléments gris utiles sont préservés. Les zones non auditées
 restent traitées de manière conservatrice.
+Les trois sprites d’ombre séparée de la noix de coco (`COCONUTS.BMP`, 4 à 6)
+utilisent le matériau translucide des ombres modernes, dans la passe au sol.
+Les pixels gris de la noix elle-même ne sont pas supprimés.
 
 ### Audio
 

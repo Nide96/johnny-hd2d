@@ -76,6 +76,27 @@ int main(int argc, char **argv) {
     jc_bmp_free(&bmp);
   }
   assert(hd == 84);
+  /* The coconut shadow is a separate draw, not part of Johnny's silhouette. */
+  JCBmp coconuts = {0};
+  assert(jc_archive_bmp(&assets.archive, "COCONUTS.BMP", &coconuts, &error));
+  assert(coconuts.count == 7);
+  const unsigned shadow_pixels[] = {37, 85, 119};
+  for (size_t id = 0; id < coconuts.count; ++id) {
+    JCDraw d = {.source_sprite = (uint16_t)id};
+    strcpy(d.resource, "COCONUTS.BMP");
+    assert(jc_hybrid_authored_shadow(&d) == (id >= 4));
+    const JCSprite *sprite = &coconuts.sprites[id];
+    unsigned grey = 0;
+    for (int k = 0; k < sprite->w * sprite->h; ++k) {
+      uint8_t value = sprite->px[k];
+      if (value == 8) ++grey;
+      if (id >= 4) assert(value == 0 || value == 8);
+    }
+    assert(grey == (id >= 4 ? shadow_pixels[id - 4] : 7));
+    assert(!jc_sprite_shadow_mask(&d)); /* No erasure of fruit shading. */
+    if (id >= 4) assert(!jc_hybrid_shadow(&d, 630, 480, 24, 20));
+  }
+  jc_bmp_free(&coconuts);
   /* The GPU copy removes only audited grey pixels. The VM/source stays exact.
    */
   JCRenderFrame frame;
