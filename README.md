@@ -15,12 +15,15 @@ It is not a fully modelled 3D scene.
 
 ## Demo video
 
-[Watch or download the demo video](johnny-castaway-demo.mp4)
+https://github.com/user-attachments/assets/d9330753-e718-41ad-b86a-7958ed6a1a21
+
+[Download the video](johnny-castaway-demo.mp4)
 
 Three minutes of actual captures: the classic presentation, reading, coconuts,
 fishing, raft building, sunset, a campfire and night on the island.
 **3 minutes · H.264 MP4 · 1280 × 720 · 60 fps · original sound effects**,
-approximately 11.8 MB. This is an optimised copy for the repository.
+The embedded preview is approximately 8.3 MB. The downloadable repository copy
+is approximately 11.8 MB and uses a higher video bitrate.
 French on-screen text explains the project, from REA
 and the C99 port to the modern Vulkan effects. The recording includes the latest
 shadow fixes.

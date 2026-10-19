@@ -6,8 +6,8 @@ les objets Git ni les bibliothèques système. 1 Mio = 1 048 576 octets.
 | Périmètre | Octets | Mio |
 | --- | ---: | ---: |
 | Dépôt courant avant ce nettoyage, sans .git | 105687778 | 100.79 |
-| Dépôt source allégé, vidéo de présentation comprise | 21681606 | 20.68 |
-| Gain sur le dépôt courant | 84006172 | 80.11 |
+| Dépôt source allégé, vidéo de présentation comprise | 21681741 | 20.68 |
+| Gain sur le dépôt courant | 84006037 | 80.11 |
 | Paquet minimal d’exécution, sans données originales | 6624659 | 6.32 |
 
 **Réduction du contenu distribué : 79.49 %.**
