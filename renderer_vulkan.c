@@ -380,8 +380,9 @@ bool renderer_frame(Renderer *r, const SceneState *s, sg_swapchain sc,
             jc_hybrid_shadow(d, x, y, jc_layout_width((float)d->w),
                              jc_layout_width((float)r->body[i].bottom)) &&
             !jc_sprite_unhandled_shadow(f, d);
-        if (r->casts_shadow[i])
-          r->stripped_pixels += jc_sprite_strip_shadow(prepared, d);
+        /* Audited baked ground shadows must also disappear on clipped parts
+         * and poses whose feet fall outside the sand/projection heuristic. */
+        r->stripped_pixels += jc_sprite_strip_shadow(prepared, d);
       }
       pixels = prepared;
     }

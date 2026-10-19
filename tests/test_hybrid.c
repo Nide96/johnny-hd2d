@@ -84,7 +84,48 @@ int main(int argc, char **argv) {
   assert(copy);
   unsigned masks = 0, removed = 0, coconut_masks = 0;
   const char *families[] = {"JOHNWALK.BMP", "MJ_AMB.BMP",  "SLEEP.BMP",
-                            "MJREAD.BMP",   "MJFISH1.BMP", "MJFISH2.BMP", "MJCOCO.BMP"};
+                            "MJREAD.BMP",   "MJFISH1.BMP", "MJFISH2.BMP", "MJCOCO.BMP",
+"COCOHEAD.BMP",
+"DRUNKJON.BMP",
+"FIRE.BMP",
+"FIRE3.BMP",
+"FIRE4.BMP",
+"GJANGRY.BMP",
+"GJCATCH1.BMP",
+"GJFFFOOD.BMP",
+"GJGULL1.BMP",
+"GJGULL1A.BMP",
+"GJGULL2.BMP",
+"GJGULL3.BMP",
+"GJGULL3A.BMP",
+"GJHOT.BMP",
+"GJNAT1.BMP",
+"GJNAT1LI.BMP",
+"GJNAT3.BMP",
+"GJRUNAWA.BMP",
+"GJVIS3.BMP",
+"GJVIS5.BMP",
+"GJVIS6.BMP",
+"JOHNWOUL.BMP",
+"MJBATH.BMP",
+"MJBOTTLE.BMP",
+"MJBTL2.BMP",
+"MJJOG1.BMP",
+"MJJOG2.BMP",
+"MJRAFT2.BMP",
+"MJSANDC.BMP",
+"MJTELE.BMP",
+"MJTELE2.BMP",
+"SHARKWLK.BMP",
+"SHKNFIST.BMP",
+"SJGFTASK.BMP",
+"SJGFTJMP.BMP",
+"SJGFTSHY.BMP",
+"SJGFTXCH.BMP",
+"SJRAFT1.BMP",
+"SLEVEJC1.BMP",
+"SLEVEJC2.BMP",
+"SLEVEJC3.BMP"};
   for (size_t n = 0; n < sizeof families / sizeof *families; ++n) {
     JCBmp bmp = {0};
     assert(jc_archive_bmp(&assets.archive, families[n], &bmp, &error));
@@ -112,6 +153,29 @@ int main(int argc, char **argv) {
             ++removed;
           }
         }
+      if (n >= 7) {
+        /* External shadow masks never remove the upper body or other colours. */
+        for (int y = 0; y < d.h * 4 / 10; ++y)
+          assert(!memcmp(copy + (size_t)y * JC_ATLAS_W,
+                         frame.atlas + (size_t)y * JC_ATLAS_W, (size_t)d.w));
+        if ((!strcmp(d.resource, "MJJOG1.BMP") ||
+             !strcmp(d.resource, "MJJOG2.BMP")) && id == 0) {
+          unsigned cloth = 0;
+          for (int y = 0; y < d.h * 7 / 10; ++y)
+            for (int x = 0; x < d.w; ++x) {
+              size_t at = (size_t)y * JC_ATLAS_W + x;
+              if (frame.atlas[at] == 8) {
+                assert(copy[at] == 8);
+                ++cloth;
+              }
+            }
+          assert(cloth == (!strcmp(d.resource, "MJJOG1.BMP") ? 61u : 90u) && m);
+        }
+        if ((!strcmp(d.resource, "GJNAT1LI.BMP") && id == 8) ||
+            (!strcmp(d.resource, "GJFFFOOD.BMP") && id == 24) ||
+            (!strcmp(d.resource, "GJANGRY.BMP") && id == 32))
+          assert(!m); /* Rock, shark and newspaper retain their grey material. */
+      }
       /* Original grey newspaper and hat shading must survive. */
       if (n == 3 && id == 3)
         assert(frame.atlas[37u * JC_ATLAS_W + 29] == 8 &&
@@ -133,7 +197,12 @@ int main(int argc, char **argv) {
         }
       }
       JCVisibleBounds b = jc_sprite_body_bounds(&frame, &d);
-      assert(b.bottom > 0 && b.bottom <= d.h && b.right <= d.w);
+      bool visible = false;
+      for (int y = 0; y < d.h; ++y)
+        for (int x = 0; x < d.w; ++x)
+          if (copy[(size_t)y * JC_ATLAS_W + x]) visible = true;
+      assert((visible ? b.bottom > 0 : b.bottom == 0) &&
+             b.bottom <= d.h && b.right <= d.w);
       if (n == 2)
         assert(jc_hybrid_contact(&d, b));
       if (n == 4)
@@ -141,7 +210,7 @@ int main(int argc, char **argv) {
     }
     jc_bmp_free(&bmp);
   }
-  assert(masks > 100 && removed > 10000 && coconut_masks == 21);
+  assert(masks > 450 && removed > 60000 && coconut_masks == 21);
   free(copy);
   JCDraw unknown = {.w = 16, .h = 16};
   strcpy(unknown.resource, "UNREVIEWED.BMP");
